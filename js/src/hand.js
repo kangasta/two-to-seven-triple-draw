@@ -33,6 +33,15 @@ class Hand {
 		}
 		return false;
 	}
+
+	static isFullHouse(cards) {
+		const trips = Hand.isNumOfAKind(3, cards);
+		if (!trips) return false;
+		const pair = Hand.isNumOfAKind(2, Hand.arraySubtraction(cards, trips))
+		if (!pair) return false;
+		trips.push(...pair);
+		return trips;
+	}
 }
 
 export default Hand;
