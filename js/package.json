@@ -1,0 +1,17 @@
+{
+  "name": "2-to-7-triple-draw",
+  "version": "0.0.1",
+  "description": "Poker hand solver",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^23.6.0"
+  }
+}
