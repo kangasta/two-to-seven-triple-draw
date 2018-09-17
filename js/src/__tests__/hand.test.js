@@ -1,6 +1,11 @@
 import Hand from '../hand';
 
 describe('Hand', () => {
+	describe('arraySubtraction', () => {
+		it('subtracts array from another', () => {
+			expect(Hand.arraySubtraction([1, 2, 3, 3, 4], [3, 4])).toEqual([1, 2])
+		});
+	});
 	describe('isNumOfAKind', () => {
 		it('returns false when no N of a kind in input array', () => {
 			var cards_in = [0, 1 + 13, 2 + 2 * 13, 3 + 3 * 13, 4, 5];

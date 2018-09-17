@@ -16,6 +16,10 @@ class Hand {
 		}
 	}
 
+	static arraySubtraction(a, b) {
+		return a.filter(c => !b.includes(c));
+	}
+
 	static isNumOfAKind(num, cards) {
 		const unique_filter = (element, index, array) => (array.indexOf(element) === index);
 		const unique = cards.
@@ -29,7 +33,6 @@ class Hand {
 		}
 		return false;
 	}
-
 }
 
 export default Hand;
