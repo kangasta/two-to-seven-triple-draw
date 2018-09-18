@@ -17,6 +17,11 @@ class Hand {
 		};
 	}
 
+	static fillWithKickers(cards_included, cards, num=5) {
+		cards = arraySubtraction(cards, cards_included).sort(Card.compare);
+		return [...cards_included, ...cards].slice(0,num);
+	}
+
 	static getUniqueValues(cards) {
 		return cards.
 			map(a => Card.getValue(a)).

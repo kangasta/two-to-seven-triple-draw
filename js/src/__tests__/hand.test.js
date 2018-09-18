@@ -1,6 +1,13 @@
 import Hand from '../hand';
 
 describe('Hand', () => {
+	describe('fillWithKickers', () => {
+		it('fill hand to match required number of cards', () => {
+			const cards = [1, 2, 3, 3 + 13, 3 + 2 * 13, 7, 8];
+			const cards_included = [3, 3 + 13, 3 + 2 * 13];
+			expect(Hand.fillWithKickers(cards_included, cards)).toEqual([3, 3 + 13, 3 + 2 * 13, 8, 7]);
+		});
+	});
 	describe('isNumOfAKind', () => {
 		it('returns false when no N of a kind in input array', () => {
 			var cards_in = [0, 1 + 13, 2 + 2 * 13, 3 + 3 * 13, 4, 5];
