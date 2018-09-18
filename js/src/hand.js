@@ -1,4 +1,5 @@
 import Card from './card';
+import { arraySubtraction, uniqueFilter } from './arr';
 
 class Hand {
 	static get HAND_RANK() {
@@ -7,24 +8,19 @@ class Hand {
 			'PAIR': 5,
 			'TWO_PAIRS': 10,
 			'THREE_OF_A_KIND': 15,
-			'STRAIGHT': 20,
+			'STRAIGHT': 20, // TODO
 			'FLUSH': 25,
 			'FULL_HOUSE': 30,
 			'FOUR_OF_A_KIND': 35,
-			'STRAIGHT_FLUSH': 40,
-			'FIVE_OF_A_KIND': 45
+			'STRAIGHT_FLUSH': 40, // TODO
+			'FIVE_OF_A_KIND': 45 // TODO: Requires wild support, which is not currently implemented
 		};
 	}
 
-	static arraySubtraction(a, b) {
-		return a.filter(c => !b.includes(c));
-	}
-
 	static isNumOfAKind(num, cards) {
-		const unique_filter = (element, index, array) => (array.indexOf(element) === index);
 		const unique = cards.
 			map(a => Card.getValue(a)).
-			filter(unique_filter).
+			filter(uniqueFilter).
 			sort((a, b) => (b - a));
 		var cards_included;
 		for (var i = 0; i < unique.length; i++) {
@@ -37,7 +33,7 @@ class Hand {
 	static isNumOfAKindCombination(nums, cards) {
 		var cards_included = [];
 		for (var i = 0; i < nums.length; i++) {
-			const numOfAKind = Hand.isNumOfAKind(nums[i], Hand.arraySubtraction(cards, cards_included));
+			const numOfAKind = Hand.isNumOfAKind(nums[i], arraySubtraction(cards, cards_included));
 			if (!numOfAKind) return false;
 			cards_included.push(...numOfAKind);
 		}
