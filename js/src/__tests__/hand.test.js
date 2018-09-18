@@ -32,6 +32,20 @@ describe('Hand', () => {
 			expect(Hand.isFullHouse(cards_in)).toEqual([1, 1 + 13, 1 + 2 * 13, 2, 2 + 13])
 		});
 	});
+	describe('isFlush', () => {
+		it('returns false when no flush in input array', () => {
+			var cards_in = [0, 1 + 13, 1 + 2 * 13, 2 + 3 * 13, 3, 4];
+			expect(Hand.isFlush(cards_in)).toEqual(false);
+		});
+		it('returns included cards sorted by value when flush in input array', () => {
+			const cards_in = [0, 1, 2, 4, 5];
+			expect(Hand.isFlush(cards_in)).toEqual([0, 5, 4, 2, 1])
+		});
+		it('slices return array to only contain num cards', () => {
+			const cards_in = [0, 1, 2, 4, 5];
+			expect(Hand.isFlush(cards_in, 4)).toEqual([0, 5, 4, 2])
+		});
+	});
 	describe('isTwoPairs', () => {
 		it('returns false when no two pairs in input array', () => {
 			var cards_in = [0, 1 + 13, 1 + 2 * 13, 2 + 3 * 13, 3, 4];

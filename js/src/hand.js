@@ -48,6 +48,14 @@ class Hand {
 		return Hand.isNumOfAKindCombination([3,2], cards);
 	}
 
+	static isFlush(cards, num=5) {
+		for (var i = 0; i < 4; i++) {
+			var suited = cards.filter(a => (Card.getSuit(a) == i));
+			if (suited.length >= num) return suited.sort(Card.compare).slice(0,num)
+		}
+		return false;
+	}
+
 	static isTwoPairs(cards) {
 		return Hand.isNumOfAKindCombination([2,2], cards);
 	}
