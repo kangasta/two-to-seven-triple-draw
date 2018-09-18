@@ -1,6 +1,16 @@
 import Hand from '../hand';
 
 describe('Hand', () => {
+	describe('solve', () => {
+		it('solves hands correctly', () => {
+			const hands = require('./hand-testdata.json').hands;
+			var solved;
+			for(var i = 0; i < hands.length; i++) {
+				solved = Hand.solve(hands[i].cards);
+				expect(solved.rank).toEqual(hands[i].rank);
+			}
+		});
+	});
 	describe('fillWithKickers', () => {
 		it('fill hand to match required number of cards', () => {
 			const cards = [1, 2, 3, 3 + 13, 3 + 2 * 13, 7, 8];

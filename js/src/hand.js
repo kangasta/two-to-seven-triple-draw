@@ -2,7 +2,7 @@ import Card from './card';
 import { arraySubtraction, last, uniqueFilter } from './arr';
 
 class Hand {
-	static get HAND_RANK() {
+	static get RANK() {
 		return {
 			'HIGH': 0,
 			'PAIR': 5,
@@ -14,6 +14,42 @@ class Hand {
 			'FOUR_OF_A_KIND': 35,
 			'STRAIGHT_FLUSH': 40,
 			'FIVE_OF_A_KIND': 45 // TODO: Requires wild support, which is not currently implemented
+		};
+	}
+
+	static solve(cards) {
+		var cards_included;
+		var hand_rank;
+
+		/* eslint-disable no-cond-assign */
+		if (cards_included = Hand.isNumOfAKind(5, cards)) {
+			hand_rank = Hand.RANK.FIVE_OF_A_KIND;
+		} else if (cards_included = Hand.isStraightFlush(cards)) {
+			hand_rank = Hand.RANK.STRAIGHT_FLUSH;
+		} else if (cards_included = Hand.isNumOfAKind(4, cards)) {
+			hand_rank = Hand.RANK.FOUR_OF_A_KIND;
+		} else if (cards_included = Hand.isFullHouse(cards)) {
+			hand_rank = Hand.RANK.FULL_HOUSE;
+		} else if (cards_included = Hand.isFlush(cards)) {
+			hand_rank = Hand.RANK.FLUSH;
+		} else if (cards_included = Hand.isStraight(cards)) {
+			hand_rank = Hand.RANK.STRAIGHT;
+		} else if (cards_included = Hand.isNumOfAKind(3, cards)) {
+			hand_rank = Hand.RANK.THREE_OF_A_KIND;
+		} else if (cards_included = Hand.isTwoPairs(cards)) {
+			hand_rank = Hand.RANK.TWO_PAIRS;
+		} else if (cards_included = Hand.isNumOfAKind(2, cards)) {
+			hand_rank = Hand.RANK.PAIR;
+		} else {
+			hand_rank = Hand.RANK.HIGH;
+		}
+		/* eslint-enable no-cond-assign */
+
+		cards_included =  Hand.fillWithKickers(cards_included, cards);
+
+		return {
+			'rank': hand_rank,
+			'cards': cards_included
 		};
 	}
 
