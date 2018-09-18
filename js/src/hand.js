@@ -8,11 +8,11 @@ class Hand {
 			'PAIR': 5,
 			'TWO_PAIRS': 10,
 			'THREE_OF_A_KIND': 15,
-			'STRAIGHT': 20, // TODO
+			'STRAIGHT': 20,
 			'FLUSH': 25,
 			'FULL_HOUSE': 30,
 			'FOUR_OF_A_KIND': 35,
-			'STRAIGHT_FLUSH': 40, // TODO
+			'STRAIGHT_FLUSH': 40,
 			'FIVE_OF_A_KIND': 45 // TODO: Requires wild support, which is not currently implemented
 		};
 	}
@@ -42,6 +42,17 @@ class Hand {
 			cards_included.push(...numOfAKind);
 		}
 		return cards_included;
+	}
+
+	static isStraightFlush(cards, num=5) {
+		var flush = [];
+		for (var i = 0; i < 4; i++) {
+			flush = cards.filter(a => Card.getSuit(a) === i);
+			if (flush.length < num) continue;
+			const straight = Hand.isStraight(flush, num);
+			if (straight) return straight;
+		}
+		return false;
 	}
 
 	static isFullHouse(cards) {

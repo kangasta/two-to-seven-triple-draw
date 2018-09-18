@@ -15,6 +15,16 @@ describe('Hand', () => {
 			}
 		});
 	});
+	describe('isStraightFlush', () => {
+		it('returns false when no straight flush in input array', () => {
+			var cards_in = [0, 1 + 13, 2, 3, 4, 5];
+			expect(Hand.isStraightFlush(cards_in)).toEqual(false);
+		});
+		it('returns included cards when straight flush in input array', () => {
+			const cards_in = [2, 13, 14, 15, 16, 17];
+			expect(Hand.isStraightFlush(cards_in)).toEqual([17, 16, 15, 14, 13]);
+		});
+	});
 	describe('isFullHouse', () => {
 		it('returns false when no full house in input array', () => {
 			var cards_in = [0, 1 + 13, 1 + 2 * 13, 2 + 3 * 13, 3, 4];
@@ -49,8 +59,10 @@ describe('Hand', () => {
 			expect(Hand.isStraight(cards_in)).toEqual(false);
 		});
 		it('returns included cards sorted by value when straight in input array', () => {
-			const cards_in = [9, 10, 11, 12, 0];
+			var cards_in = [9, 10, 11, 12, 0];
 			expect(Hand.isStraight(cards_in)).toEqual([0, 12, 11, 10, 9]);
+			cards_in = [14, 15, 16, 17, 18];
+			expect(Hand.isStraight(cards_in)).toEqual([18, 17, 16, 15, 14]);
 		});
 		it('finds straight with small ace', () => {
 			const cards_in = [0, 1 + 13, 2 + 2 * 13, 3, 4 + 3 * 13];
