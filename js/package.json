@@ -4,14 +4,17 @@
   "description": "Poker hand solver",
   "main": "build/index.js",
   "scripts": {
+    "pretest": "eslint .",
     "test": "jest"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "babel": "^6.23.0",
+    "babel-eslint": "^9.0.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "eslint": "^5.6.0",
     "jest": "^23.6.0"
   }
 }

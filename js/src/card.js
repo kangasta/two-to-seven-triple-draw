@@ -5,7 +5,7 @@ class Card {
 			'SPADES':    1,
 			'DIAMONDS':  2,
 			'CLUBS':     3
-		}
+		};
 	}
 
 	static getSuit(num) {

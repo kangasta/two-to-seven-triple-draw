@@ -1,4 +1,4 @@
-import Card from "./card";
+import Card from './card';
 
 class Hand {
 	static get HAND_RANK() {
@@ -13,7 +13,7 @@ class Hand {
 			'FOUR_OF_A_KIND': 35,
 			'STRAIGHT_FLUSH': 40,
 			'FIVE_OF_A_KIND': 45
-		}
+		};
 	}
 
 	static arraySubtraction(a, b) {
@@ -25,10 +25,10 @@ class Hand {
 		const unique = cards.
 			map(a => Card.getValue(a)).
 			filter(unique_filter).
-			sort((a, b) => (b - a))
+			sort((a, b) => (b - a));
 		var cards_included;
 		for (var i = 0; i < unique.length; i++) {
-			cards_included = cards.filter(a => (Card.getValue(a) == unique[i]))
+			cards_included = cards.filter(a => (Card.getValue(a) == unique[i]));
 			if (cards_included.length >= num) return cards_included;
 		}
 		return false;
@@ -51,7 +51,7 @@ class Hand {
 	static isFlush(cards, num=5) {
 		for (var i = 0; i < 4; i++) {
 			var suited = cards.filter(a => (Card.getSuit(a) == i));
-			if (suited.length >= num) return suited.sort(Card.compare).slice(0,num)
+			if (suited.length >= num) return suited.sort(Card.compare).slice(0,num);
 		}
 		return false;
 	}
