@@ -17,7 +17,7 @@ class Card {
 	}
 
 	static compare(a,b) {
-		return Card.getValue(b) -Card.getValue(a);
+		return Card.getValue(b) - Card.getValue(a);
 	}
 }
 
