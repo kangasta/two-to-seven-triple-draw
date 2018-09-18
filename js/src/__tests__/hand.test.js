@@ -32,4 +32,16 @@ describe('Hand', () => {
 			expect(Hand.isFullHouse(cards_in)).toEqual([1, 1 + 13, 1 + 2 * 13, 2, 2 + 13])
 		});
 	});
+	describe('isTwoPairs', () => {
+		it('returns false when no two pairs in input array', () => {
+			var cards_in = [0, 1 + 13, 1 + 2 * 13, 2 + 3 * 13, 3, 4];
+			expect(Hand.isTwoPairs(cards_in)).toEqual(false);
+			cards_in.push(1)
+			expect(Hand.isTwoPairs(cards_in)).toEqual(false);
+		});
+		it('returns included cards when two pairs in input array', () => {
+			const cards_in = [0, 1 + 13, 1 + 2 * 13, 2, 2 + 13];
+			expect(Hand.isTwoPairs(cards_in)).toEqual([2, 2 + 13, 1 + 13, 1 + 2 * 13])
+		});
+	});
 });

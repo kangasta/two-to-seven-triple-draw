@@ -26,21 +26,30 @@ class Hand {
 			map(a => Card.getValue(a)).
 			filter(unique_filter).
 			sort((a, b) => (b - a))
-		var cards_in;
+		var cards_included;
 		for (var i = 0; i < unique.length; i++) {
-			cards_in = cards.filter(a => (Card.getValue(a) == unique[i]))
-			if (cards_in.length >= num) return cards_in;
+			cards_included = cards.filter(a => (Card.getValue(a) == unique[i]))
+			if (cards_included.length >= num) return cards_included;
 		}
 		return false;
 	}
 
+	static isNumOfAKindCombination(nums, cards) {
+		var cards_included = [];
+		for (var i = 0; i < nums.length; i++) {
+			const numOfAKind = Hand.isNumOfAKind(nums[i], Hand.arraySubtraction(cards, cards_included));
+			if (!numOfAKind) return false;
+			cards_included.push(...numOfAKind);
+		}
+		return cards_included;
+	}
+
 	static isFullHouse(cards) {
-		const trips = Hand.isNumOfAKind(3, cards);
-		if (!trips) return false;
-		const pair = Hand.isNumOfAKind(2, Hand.arraySubtraction(cards, trips))
-		if (!pair) return false;
-		trips.push(...pair);
-		return trips;
+		return Hand.isNumOfAKindCombination([3,2], cards);
+	}
+
+	static isTwoPairs(cards) {
+		return Hand.isNumOfAKindCombination([2,2], cards);
 	}
 }
 
