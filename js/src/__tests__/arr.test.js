@@ -1,4 +1,4 @@
-import { arraySubtraction, last, uniqueFilter } from '../arr';
+import { arraySubtraction, isSorted, last, shuffle, uniqueFilter } from '../arr';
 
 describe('arraySubtraction', () => {
 	it('subtracts array from another', () => {
@@ -8,9 +8,25 @@ describe('arraySubtraction', () => {
 		expect(arraySubtraction([1, 2, 3], [])).toEqual([1, 2, 3]);
 	});
 });
+describe('isSorted', () => {
+	it('determines if array is sorted or not', () => {
+		const gt = (a, b) => (b - a);
+		expect(isSorted([5, 4, 2, 3, 1], gt)).toEqual(false);
+		expect(isSorted([5, 4, 3, 2, 1], gt)).toEqual(true);
+	});
+});
 describe('last', () => {
 	it('returns last element of array', () => {
 		expect(last([1, 2, 3])).toEqual(3);
+	});
+});
+describe('shuffle', () => {
+	it('shuffles an array', () => {
+		const gt = (a, b) => (b - a);
+		var arr = [5, 4, 3, 2, 1];
+		expect(isSorted(arr, gt)).toEqual(true);
+		shuffle(arr);
+		expect(isSorted(arr, gt)).toEqual(false);
 	});
 });
 describe('uniqueFilter', () => {
