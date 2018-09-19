@@ -41,6 +41,7 @@ class Hand {
 		} else if (cards_included = Hand.isNumOfAKind(2, cards)) {
 			hand_rank = Hand.RANK.PAIR;
 		} else {
+			cards_included = [];
 			hand_rank = Hand.RANK.HIGH;
 		}
 		/* eslint-enable no-cond-assign */
