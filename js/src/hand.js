@@ -17,22 +17,22 @@ class Hand {
 		};
 	}
 
-	static solve(cards) {
+	static solve(cards, num=5) {
 		var cards_included;
 		var hand_rank;
 
 		/* eslint-disable no-cond-assign */
 		if (cards_included = Hand.isNumOfAKind(5, cards)) {
 			hand_rank = Hand.RANK.FIVE_OF_A_KIND;
-		} else if (cards_included = Hand.isStraightFlush(cards)) {
+		} else if (cards_included = Hand.isStraightFlush(cards, num)) {
 			hand_rank = Hand.RANK.STRAIGHT_FLUSH;
 		} else if (cards_included = Hand.isNumOfAKind(4, cards)) {
 			hand_rank = Hand.RANK.FOUR_OF_A_KIND;
 		} else if (cards_included = Hand.isFullHouse(cards)) {
 			hand_rank = Hand.RANK.FULL_HOUSE;
-		} else if (cards_included = Hand.isFlush(cards)) {
+		} else if (cards_included = Hand.isFlush(cards, num)) {
 			hand_rank = Hand.RANK.FLUSH;
-		} else if (cards_included = Hand.isStraight(cards)) {
+		} else if (cards_included = Hand.isStraight(cards, num)) {
 			hand_rank = Hand.RANK.STRAIGHT;
 		} else if (cards_included = Hand.isNumOfAKind(3, cards)) {
 			hand_rank = Hand.RANK.THREE_OF_A_KIND;
