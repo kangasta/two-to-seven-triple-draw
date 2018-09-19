@@ -22,3 +22,29 @@ The value of the card is defined as `num % 13 || low_ace ? 0 : 13`. This results
 The `Card` class provides static methods `getSuit(num)`, `getValue(num)`, `compare(a, b)`. The `compare(a, b)` method can be used to sort cards from high to low.
 
 ### Hand
+
+Hand provides `solve(cards, num=5)` and `compare(a, b)` functions to solve and compare poker hands. Hand is passed in to the solver as a array of numbers. Solver returns object with fields for rank of the hand and cards included in the hand. For example, ace to five straight-flush would result to:
+
+```json
+{
+	"rank": 45,
+	"cards": [0, 4, 3, 2, 1]
+}
+```
+
+where the number for hand rank is the one defined in `Hand.RANK`:
+
+Number | Hand
+------ | ----
+   45  |  Five of a kind
+   40  |  Straight flush
+   35  |  Four of a kind
+   30  |  Full house
+   25  |  Flush
+   20  |  Straight
+   15  |  Three of a kind
+   10  |  Two pairs
+   5  |  Pair
+   0  |  High
+
+The compare function takes in output objects from `solve(...)` function.
