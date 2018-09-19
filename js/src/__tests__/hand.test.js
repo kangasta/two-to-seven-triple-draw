@@ -1,4 +1,5 @@
 import Hand from '../hand';
+import { isSorted, shuffle } from '../arr';
 
 describe('Hand', () => {
 	describe('solve', () => {
@@ -9,6 +10,16 @@ describe('Hand', () => {
 				solved = Hand.solve(hands[i].cards);
 				expect(solved.rank).toEqual(hands[i].rank);
 			}
+		});
+	});
+	describe('compare', () => {
+		it('can be used to sort hands from high to low', () => {
+			var hands = require('./hand-testdata.json').hands;
+			expect(isSorted(hands, Hand.compare)).toEqual(true);
+			shuffle(hands);
+			expect(isSorted(hands, Hand.compare)).toEqual(false);
+			hands.sort(Hand.compare);
+			expect(isSorted(hands, Hand.compare)).toEqual(true);
 		});
 	});
 	describe('fillWithKickers', () => {

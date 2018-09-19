@@ -54,6 +54,17 @@ class Hand {
 		};
 	}
 
+	static compare(a, b) {
+		var r;
+		/* eslint-disable no-cond-assign */
+		if ((r = b.rank - a.rank) !== 0) return r;
+		for (var i = 0; i < 5; i++) {
+			if ((r = Card.compare(a.cards[i], b.cards[i])) !== 0) return r;
+		}
+		/* eslint-enable no-cond-assign */
+		return 0;
+	}
+
 	static fillWithKickers(cards_included, cards, num=5) {
 		cards = arraySubtraction(cards, cards_included).sort(Card.compare);
 		return [...cards_included, ...cards].slice(0,num);

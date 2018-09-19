@@ -14,7 +14,7 @@ const shuffle = (arr) => {
 };
 
 const isSorted = (arr, func) => {
-	if (arr.reduce((acc, cur)=>{
+	if (arr.reduce((acc, cur) => {
 		if (acc === false) return false;
 		if (func(acc, cur) <= 0) return cur;
 		return false;
