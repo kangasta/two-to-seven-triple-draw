@@ -16,7 +16,7 @@ class Card {
 		return num % 13 || low_ace ? num % 13 : 13;
 	}
 
-	static compare(a,b) {
+	static compare(a, b) {
 		return Card.getValue(b) - Card.getValue(a);
 	}
 }

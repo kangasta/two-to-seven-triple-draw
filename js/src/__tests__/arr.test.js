@@ -4,6 +4,9 @@ describe('arraySubtraction', () => {
 	it('subtracts array from another', () => {
 		expect(arraySubtraction([1, 2, 3, 3, 4], [3, 4])).toEqual([1, 2]);
 	});
+	it('works with empty b array', () => {
+		expect(arraySubtraction([1, 2, 3], [])).toEqual([1, 2, 3]);
+	});
 });
 describe('last', () => {
 	it('returns last element of array', () => {
