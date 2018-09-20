@@ -23,7 +23,7 @@ const isSorted = (arr, func) => {
 		if (acc === false) return false;
 		if (func(acc, cur) <= 0) return cur;
 		return false;
-	}, arr[0]) !== false) {
+	}) !== false) {
 		return true;
 	}
 	return false;

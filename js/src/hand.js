@@ -1,5 +1,5 @@
 import Card from './card';
-import { arraySubtraction, last, uniqueFilter } from './arr';
+import { arraySubtraction, getCombinations, last, uniqueFilter } from './arr';
 
 class Hand {
 	static get RANK() {
@@ -54,6 +54,21 @@ class Hand {
 		};
 	}
 
+	static solveHoldEm(table_cards, hand_cards, must_use=0) {
+		if (must_use === 0) return Hand.solve([...table_cards, ...hand_cards]);
+
+		const table_combinations = getCombinations(table_cards, table_cards.length - must_use);
+		const hand_combinations = getCombinations(hand_cards, Math.min(hand_cards.length, must_use));
+		var hands = [];
+		for (var i = 0; i < table_combinations.length; i++) {
+			for (var j = 0; j < hand_combinations.length; j++) {
+				hands.push(Hand.solve([...(table_combinations[i]), ...(hand_combinations[j])]));
+			}
+		}
+
+		return Hand.max(...hands);
+	}
+
 	static compare(a, b) {
 		var r;
 		/* eslint-disable no-cond-assign */
@@ -63,6 +78,11 @@ class Hand {
 		}
 		/* eslint-enable no-cond-assign */
 		return 0;
+	}
+
+	static max(...arr) {
+		const max2 = (a,b) => (Hand.compare(a, b) < 0 ? a : b);
+		return arr.reduce((a, b) => max2(a, b));
 	}
 
 	static fillWithKickers(cards_included, cards, num=5) {

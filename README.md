@@ -23,7 +23,7 @@ The `Card` class provides static methods `getSuit(num)`, `getValue(num)`, `compa
 
 ### Hand
 
-Hand provides `solve(cards, num=5)` and `compare(a, b)` functions to solve and compare poker hands. Hand is passed in to the solver as a array of numbers. Solver returns object with fields for rank of the hand and cards included in the hand. For example, ace to five straight-flush would result to:
+Hand provides `solve(cards, num=5)`, `solveHoldEm(table_cards, hand_cards, must_use=0)`, and `compare(a, b)` functions to solve and compare poker hands. `solveHoldEm(...)` is a helper function to support games where N number of cards from players hand cards must be used, such as Omaha hold em. Hand is passed in to the solver as a array of numbers. Solver returns object with fields for rank of the hand and cards included in the hand. For example, ace to five straight-flush would result to:
 
 ```json
 {

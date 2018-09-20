@@ -12,6 +12,16 @@ describe('Hand', () => {
 			}
 		});
 	});
+	describe('solveHoldEm', () => {
+		it('solves Texas hold em hands', () => {
+			expect(Hand.solveHoldEm([1, 2, 3, 5, 6], [4, 13])).toEqual(Hand.solve([2, 3, 5, 6, 4]));
+			expect(Hand.solveHoldEm([1, 2, 3, 5, 6], [4, 13])).toEqual(Hand.solve([1, 2, 3, 5, 6, 4, 13]));
+		});
+		it('solves Omaha hold em hands', () => {
+			expect(Hand.solveHoldEm([1, 2, 3, 5, 6], [4, 12, 11, 10], 2)).toEqual(Hand.solve([12, 11, 6, 5, 3]));
+			expect(Hand.solveHoldEm([0, 13, 26, 39, 6], [12, 7, 4, 2], 2).rank).toEqual(Hand.RANK.THREE_OF_A_KIND);
+		});
+	});
 	describe('compare', () => {
 		it('can be used to sort hands from high to low', () => {
 			var hands = require('./hand-testdata.json').hands;
@@ -20,6 +30,17 @@ describe('Hand', () => {
 			expect(isSorted(hands, Hand.compare)).toEqual(false);
 			hands.sort(Hand.compare);
 			expect(isSorted(hands, Hand.compare)).toEqual(true);
+		});
+	});
+	describe('max', () => {
+		it('returns the largest of the inputs', () => {
+			expect(Hand.max(
+				Hand.solve([1, 2, 4, 5, 6]),
+				Hand.solve([1, 3, 4, 5, 6]))).toEqual(Hand.solve([1, 3, 4, 5, 6]));
+			expect(Hand.max(
+				Hand.solve([1, 2, 4, 5, 6]),
+				Hand.solve([1, 3, 4, 5, 6]),
+				Hand.solve([1, 4, 5, 6, 7]))).toEqual(Hand.solve([1, 4, 5, 6, 7]));
 		});
 	});
 	describe('fillWithKickers', () => {
