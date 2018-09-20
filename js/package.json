@@ -2,8 +2,9 @@
   "name": "2-to-7-triple-draw",
   "version": "0.2.0",
   "description": "Poker hand solver",
-  "main": "build/index.js",
+  "main": "build/2-to-7-triple-draw.js",
   "scripts": {
+    "build": "babel src -d build --ignore '**/__tests__/*'",
     "pretest": "eslint .",
     "test": "jest"
   },
@@ -11,6 +12,7 @@
   "license": "MIT",
   "devDependencies": {
     "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^9.0.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
