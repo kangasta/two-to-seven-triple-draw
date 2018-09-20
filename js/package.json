@@ -1,6 +1,6 @@
 {
   "name": "2-to-7-triple-draw",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Poker hand solver",
   "main": "build/index.js",
   "scripts": {
