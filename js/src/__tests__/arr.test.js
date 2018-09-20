@@ -1,4 +1,4 @@
-import { arraySubtraction, isSorted, last, shuffle, uniqueFilter } from '../arr';
+import { arraySubtraction, getCombinations, isSorted, last, shuffle, uniqueFilter } from '../arr';
 
 describe('arraySubtraction', () => {
 	it('subtracts array from another', () => {
@@ -6,6 +6,13 @@ describe('arraySubtraction', () => {
 	});
 	it('works with empty b array', () => {
 		expect(arraySubtraction([1, 2, 3], [])).toEqual([1, 2, 3]);
+	});
+});
+describe('getCombinations', () => {
+	it('gives all possible n element combinations from an array', () => {
+		expect(getCombinations([1, 2, 3], 1)).toEqual([[1], [2], [3]]);
+		expect(getCombinations([1, 2, 3], 2)).toEqual([[1, 2], [1, 3], [2, 3]]);
+		expect(getCombinations([1, 2, 3], 3)).toEqual([[1, 2, 3]]);
 	});
 });
 describe('isSorted', () => {
