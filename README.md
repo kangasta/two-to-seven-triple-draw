@@ -10,12 +10,12 @@ __Work in progress.__ Poker hand solver.
 
 Cards are passed around as integers. The suit of the cards is defined as `Math.floor(num/13) % 4`. The output integer maps to card suit as:
 
-Integer |     | Suit
-------- | --- | ----
-   0    |  ♥  | Hearts
-   1    |  ♠  | Spades
-   2    |  ♦  | Diamonds
-   3    |  ♣  | Clubs
+Integer | Suit
+------- | -------
+   0    |  ♥ Hearts
+   1    |  ♠ Spades
+   2    |  ♦ Diamonds
+   3    |  ♣ Clubs
 
 The value of the card is defined as `num % 13 || low_ace ? 0 : 13`. This results to value being represented as one smaller than it would be in an actual playing card. Aces are high by default.
 
@@ -35,7 +35,7 @@ Hand provides `solve(cards, num=5)` and `compare(a, b)` functions to solve and c
 where the number for hand rank is the one defined in `Hand.RANK`:
 
 Number | Hand
------- | ----
+------ | ------------
    45  |  Five of a kind
    40  |  Straight flush
    35  |  Four of a kind
@@ -44,7 +44,7 @@ Number | Hand
    20  |  Straight
    15  |  Three of a kind
    10  |  Two pairs
-   5  |  Pair
-   0  |  High
+   5   |  Pair
+   0   |  High
 
 The compare function takes in output objects from `solve(...)` function.
