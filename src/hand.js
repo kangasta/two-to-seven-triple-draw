@@ -84,6 +84,11 @@ class Hand {
 		return 0;
 	}
 
+	static winners(...arr) {
+		const max = Hand.max(...arr);
+		return arr.filter(a => (!Hand.compare(a, max)));
+	}
+
 	static max(...arr) {
 		const max2 = (a,b) => (Hand.compare(a, b) < 0 ? a : b);
 		return arr.reduce((a, b) => max2(a, b));

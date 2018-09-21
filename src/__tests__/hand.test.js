@@ -39,6 +39,17 @@ describe('Hand', () => {
 			expect(isSorted(hands, Hand.compare)).toEqual(true);
 		});
 	});
+	describe('winners', () => {
+		it('returns the winning hands', () => {
+			const hands = [
+				Hand.solve([1, 2, 3, 4, 5, 12, 13]),
+				Hand.solve([1, 2, 3, 4, 5, 7, 8]),
+				Hand.solve([1, 2, 3, 4, 7, 12, 13]),
+				Hand.solve([1, 2, 3, 5, 6, 12, 13]),
+			];
+			expect(Hand.winners(...hands)).toEqual([hands[0], hands[1]]);
+		});
+	});
 	describe('max', () => {
 		it('returns the largest of the inputs', () => {
 			expect(Hand.max(
