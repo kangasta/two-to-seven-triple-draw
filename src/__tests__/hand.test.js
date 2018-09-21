@@ -2,6 +2,13 @@ import Hand from '../hand';
 import { isSorted, shuffle } from '../arr';
 
 describe('Hand', () => {
+	Hand.prototype.removeUuid = function() {
+		return {
+			'rank': this.rank,
+			'cards': this.cards
+		};
+	};
+
 	describe('solve', () => {
 		it('solves hands correctly', () => {
 			const hands = require('./hand-testdata.json').hands;
@@ -14,11 +21,11 @@ describe('Hand', () => {
 	});
 	describe('solveHoldEm', () => {
 		it('solves Texas hold em hands', () => {
-			expect(Hand.solveHoldEm([1, 2, 3, 5, 6], [4, 13])).toEqual(Hand.solve([2, 3, 5, 6, 4]));
-			expect(Hand.solveHoldEm([1, 2, 3, 5, 6], [4, 13])).toEqual(Hand.solve([1, 2, 3, 5, 6, 4, 13]));
+			expect(Hand.solveHoldEm([1, 2, 3, 5, 6], [4, 13]).removeUuid()).toEqual(Hand.solve([2, 3, 5, 6, 4]).removeUuid());
+			expect(Hand.solveHoldEm([1, 2, 3, 5, 6], [4, 13]).removeUuid()).toEqual(Hand.solve([1, 2, 3, 5, 6, 4, 13]).removeUuid());
 		});
 		it('solves Omaha hold em hands', () => {
-			expect(Hand.solveHoldEm([1, 2, 3, 5, 6], [4, 12, 11, 10], 2)).toEqual(Hand.solve([12, 11, 6, 5, 3]));
+			expect(Hand.solveHoldEm([1, 2, 3, 5, 6], [4, 12, 11, 10], 2).removeUuid()).toEqual(Hand.solve([12, 11, 6, 5, 3]).removeUuid());
 			expect(Hand.solveHoldEm([0, 13, 26, 39, 6], [12, 7, 4, 2], 2).rank).toEqual(Hand.RANK.THREE_OF_A_KIND);
 		});
 	});
@@ -35,12 +42,12 @@ describe('Hand', () => {
 	describe('max', () => {
 		it('returns the largest of the inputs', () => {
 			expect(Hand.max(
-				Hand.solve([1, 2, 4, 5, 6]),
-				Hand.solve([1, 3, 4, 5, 6]))).toEqual(Hand.solve([1, 3, 4, 5, 6]));
+				Hand.solve([1, 2, 4, 5, 6]).removeUuid(),
+				Hand.solve([1, 3, 4, 5, 6]).removeUuid())).toEqual(Hand.solve([1, 3, 4, 5, 6]).removeUuid());
 			expect(Hand.max(
-				Hand.solve([1, 2, 4, 5, 6]),
-				Hand.solve([1, 3, 4, 5, 6]),
-				Hand.solve([1, 4, 5, 6, 7]))).toEqual(Hand.solve([1, 4, 5, 6, 7]));
+				Hand.solve([1, 2, 4, 5, 6]).removeUuid(),
+				Hand.solve([1, 3, 4, 5, 6]).removeUuid(),
+				Hand.solve([1, 4, 5, 6, 7]).removeUuid())).toEqual(Hand.solve([1, 4, 5, 6, 7]).removeUuid());
 		});
 	});
 	describe('fillWithKickers', () => {

@@ -1,7 +1,14 @@
 import Card from './card';
+import { uuid4 } from './uuid';
 import { arraySubtraction, getCombinations, last, uniqueFilter } from './arr';
 
 class Hand {
+	constructor(rank, cards) {
+		this.rank = rank;
+		this.cards = cards;
+		this.uuid = uuid4();
+	}
+
 	static get RANK() {
 		return {
 			'HIGH': 0,
@@ -48,10 +55,7 @@ class Hand {
 
 		cards_included =  Hand.fillWithKickers(cards_included, cards);
 
-		return {
-			'rank': hand_rank,
-			'cards': cards_included
-		};
+		return new Hand(hand_rank, cards_included);
 	}
 
 	static solveHoldEm(table_cards, hand_cards, must_use=0) {
