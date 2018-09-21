@@ -44,4 +44,4 @@ const uniqueFilter = (element, index, array) => {
 	return array.indexOf(element) === index;
 };
 
-export {arraySubtraction, getCombinations, isSorted, last, shuffle, uniqueFilter};
+export { arraySubtraction, getCombinations, isSorted, last, shuffle, uniqueFilter };

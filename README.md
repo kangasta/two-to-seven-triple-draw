@@ -9,6 +9,27 @@ Poker hand solver. Supports:
 - comparing hands.
 - finding the best hand from given inputs. Similarly than `Math.max(...)`.
 
+## Installation
+
+```bash
+npm i two-to-seven-triple-draw
+```
+
+## Usage
+
+```js
+Hand = require('two-to-seven-triple-draw').Hand;
+
+// Solve five card hand
+const acequads = Hand.solve([0, 13, 26, 39, 2]);
+
+// Solve Omaha hold em hand
+const fullhouse = Hand.solveHoldEm([0, 13, 26, 39, 2], [25, 38, 11, 24], 2);
+
+// Get best hand
+console.log(Hand.max(acequads, fullhouse));
+```
+
 ## Documentation
 
 This package provides two classes: Card and Hand. Card class implements logic for comparing and handling cards, which are passed around as integers. Hand class implements logit for comparing and solving poker hands, which are created from arrays of integers.
