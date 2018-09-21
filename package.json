@@ -8,8 +8,16 @@
     "pretest": "eslint .",
     "test": "jest"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kangasta/2-to-7-triple-draw.git"
+  },
+  "author": "Toni Kangas",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kangasta/2-to-7-triple-draw/issues"
+  },
+  "homepage": "https://github.com/kangasta/2-to-7-triple-draw",
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
