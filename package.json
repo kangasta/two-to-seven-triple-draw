@@ -2,7 +2,7 @@
   "name": "two-to-seven-triple-draw",
   "version": "0.2.5",
   "description": "Poker hand solver",
-  "main": "build/2-to-7-triple-draw.js",
+  "main": "build/two-to-seven-triple-draw.js",
   "scripts": {
     "build": "babel src -d build --ignore '**/__tests__/*'",
     "pretest": "eslint .",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kangasta/2-to-7-triple-draw.git"
+    "url": "https://github.com/kangasta/two-to-seven-triple-draw.git"
   },
   "author": "Toni Kangas",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kangasta/2-to-7-triple-draw/issues"
+    "url": "https://github.com/kangasta/two-to-seven-triple-draw/issues"
   },
-  "homepage": "https://github.com/kangasta/2-to-7-triple-draw",
+  "homepage": "https://github.com/kangasta/two-to-seven-triple-draw",
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",

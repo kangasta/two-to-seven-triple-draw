@@ -1,6 +1,6 @@
-# 2-to-7-triple-draw
+# two-to-seven-triple-draw
 
-[![Build Status](https://travis-ci.org/kangasta/2-to-7-triple-draw.svg?branch=master)](https://travis-ci.org/kangasta/2-to-7-triple-draw)
+[![Build Status](https://travis-ci.org/kangasta/two-to-seven-triple-draw.svg?branch=master)](https://travis-ci.org/kangasta/two-to-seven-triple-draw)
 
 Poker hand solver. Supports:
 - solving the best hand from up to nine cards.
