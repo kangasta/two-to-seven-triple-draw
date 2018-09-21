@@ -11,6 +11,8 @@ Poker hand solver. Supports:
 
 ## Documentation
 
+This package provides two classes: Card and Hand. Card class implements logic for comparing and handling cards, which are passed around as integers. Hand class implements logit for comparing and solving poker hands, which are created from arrays of integers.
+
 ### Card
 
 Card provides static methods `Card.getSuit(num)`, `Card.getValue(num)`, `Card.compare(a, b)`. The `Card.compare(...)` method can be used to sort cards from high to low.
