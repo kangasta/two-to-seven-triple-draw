@@ -1,5 +1,4 @@
 language: node_js
 node_js:
   - node
-install: cd js && npm i;
 script: npm test -- --coverage --verbose;
