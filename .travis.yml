@@ -15,3 +15,5 @@ deploy:
   - provider: npm
     email: "toni.ar.kangas@gmail.com"
     api_key: $NPM_TOKEN
+    on:
+      tags: true
