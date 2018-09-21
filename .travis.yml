@@ -4,6 +4,7 @@ node_js:
 script: npm test -- --coverage --verbose;
 before_deploy:
   - npm pack
+  - npm run build
 deploy:
   - provider: releases
     api_key: $GITHUB_TOKEN
@@ -15,5 +16,6 @@ deploy:
   - provider: npm
     email: "toni.ar.kangas@gmail.com"
     api_key: $NPM_TOKEN
+    skip_cleanup: true
     on:
       tags: true
