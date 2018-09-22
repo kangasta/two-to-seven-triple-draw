@@ -12,6 +12,7 @@
     "type": "git",
     "url": "https://github.com/kangasta/two-to-seven-triple-draw.git"
   },
+  "keywords": ["poker", "game", "holdem", "texasholdem", "omahaholdem"],
   "author": "Toni Kangas",
   "license": "MIT",
   "bugs": {
