@@ -1,6 +1,19 @@
 import Card from '../card';
 
 describe('Card', () => {
+	describe('toString', () => {
+		it('gives string representation of a card', () => {
+			const card = new Card(13);
+			expect(card.toString()).toEqual('ace of spades');
+			expect(card.toString(Card.STRING_TYPE.SHORT)).toEqual('As');
+		});
+		it('supports different formats', () => {
+			const card = new Card(14);
+			expect(card.toString(Card.STRING_TYPE.LONG)).toEqual('two of spades');
+			expect(card.toString(Card.STRING_TYPE.SHORT)).toEqual('2s');
+			expect(card.toString(Card.STRING_TYPE.SHORT_EMOJI)).toEqual('2♠');
+		});
+	});
 	describe('getSuite', () =>{
 		it('returns suit of card as defined by SUITS', () => {
 			const suits = [Card.SUITS.HEARTS, Card.SUITS.SPADES, Card.SUITS.DIAMONDS, Card.SUITS.CLUBS];
