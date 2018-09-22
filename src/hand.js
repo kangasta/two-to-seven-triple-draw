@@ -9,6 +9,38 @@ class Hand {
 		this.uuid = uuid4();
 	}
 
+	getCardsString(card_str_t=Card.STRING_TYPE.SHORT) {
+		return this.cards.map(a => (new Card(a).toString(card_str_t))).join(', ');
+	}
+
+	toString(card_str_t=Card.STRING_TYPE.SHORT) {
+		const high_str_t = Card.STRING_TYPE.LONG_VALUE;
+		const value = (i) => (new Card(this.cards[i])).toString(high_str_t);
+
+		switch (this.rank) {
+		case Hand.RANK.FIVE_OF_A_KIND:
+			return 'Five of a kind, ' + value(0) + 's (' + this.getCardsString(card_str_t) + ')';
+		case Hand.RANK.STRAIGHT_FLUSH:
+			return 'Straigth flush, ' + value(0) + ' high (' + this.getCardsString(card_str_t) + ')';
+		case Hand.RANK.FOUR_OF_A_KIND:
+			return 'Four of a kind, ' + value(0) + 's (' + this.getCardsString(card_str_t) + ')';
+		case Hand.RANK.FULL_HOUSE:
+			return 'Full house, ' + value(0) + 's over ' + value(3) + 's (' + this.getCardsString(card_str_t) + ')';
+		case Hand.RANK.FLUSH:
+			return 'Flush, ' + value(0) + ' high (' + this.getCardsString(card_str_t) + ')';
+		case Hand.RANK.STRAIGHT:
+			return 'Straigth, ' + value(0) + ' high (' + this.getCardsString(card_str_t) + ')';
+		case Hand.RANK.THREE_OF_A_KIND:
+			return 'Three of a kind, ' + value(0) + 's (' + this.getCardsString(card_str_t) + ')';
+		case Hand.RANK.TWO_PAIRS:
+			return 'Two pairs, ' + value(0) + 's and ' + value(2) + 's (' + this.getCardsString(card_str_t) + ')';
+		case Hand.RANK.PAIR:
+			return 'Pair, ' + value(0) + 's (' + this.getCardsString(card_str_t) + ')';
+		case Hand.RANK.HIGH:
+			return value(0).replace(/^\w/, a => a.toUpperCase()) + ' high (' + this.getCardsString(card_str_t) + ')';
+		}
+	}
+
 	static get RANK() {
 		return {
 			'HIGH': 0,

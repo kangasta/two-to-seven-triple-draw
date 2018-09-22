@@ -27,7 +27,7 @@ const acequads = Hand.solve([0, 13, 26, 39, 2]);
 const fullhouse = Hand.solveHoldEm([0, 13, 26, 39, 2], [25, 38, 11, 24], 2);
 
 // Get best hand
-console.log(Hand.max(acequads, fullhouse));
+console.log(Hand.max(acequads, fullhouse).toString());
 ```
 
 ## Documentation

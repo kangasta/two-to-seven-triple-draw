@@ -9,6 +9,16 @@ describe('Hand', () => {
 		};
 	};
 
+	describe('toString',() => {
+		it('solves hands correctly', () => {
+			const hands = require('./hand-testdata.json').strings;
+			var str;
+			for(var i = 0; i < hands.length; i++) {
+				str = Hand.solve(hands[i].cards).toString();
+				expect(str).toEqual(hands[i].string);
+			}
+		});
+	});
 	describe('solve', () => {
 		it('solves hands correctly', () => {
 			const hands = require('./hand-testdata.json').hands;

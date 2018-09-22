@@ -92,5 +92,47 @@
 			"rank": 0,
 			"cards": [19, 5, 16, 15, 14]
 		}
+	],
+	"strings": [
+		{
+			"string": "Five of a kind, aces (Ah, As, Ad, Ac, Ah)",
+			"cards": [0, 13, 26, 39, 52]
+		},
+		{
+			"string": "Straigth flush, five high (5s, 4s, 3s, 2s, As)",
+			"cards": [13, 14, 15, 16, 17]
+		},
+		{
+			"string": "Four of a kind, aces (Ah, As, Ad, Ac, Kh)",
+			"cards": [0, 13, 26, 39, 12]
+		},
+		{
+			"string": "Full house, kings over jacks (Ks, Kd, Kc, Jh, Js)",
+			"cards": [25, 38, 51, 10, 23]
+		},
+		{
+			"string": "Flush, ace high (Ah, Qh, Jh, Th, 9h)",
+			"cards": [0, 11, 10, 9, 8]
+		},
+		{
+			"string": "Straigth, ace high (Ah, Ks, Qd, Jc, Th)",
+			"cards": [0, 25, 37, 49, 9]
+		},
+		{
+			"string": "Three of a kind, aces (Ah, As, Ad, Kh, Qh)",
+			"cards": [0, 13, 26, 12, 11]
+		},
+		{
+			"string": "Two pairs, kings and jacks (Ks, Kd, Jh, Js, 9c)",
+			"cards": [25, 38, 10, 23, 47]
+		},
+		{
+			"string": "Pair, aces (Ah, As, Kh, Qh, Jh)",
+			"cards": [0, 13, 12, 11, 10]
+		},
+		{
+			"string": "Eight high (8h, 7s, 4h, 3h, 2h)",
+			"cards": [7, 19, 3, 2, 1]
+		}
 	]
 }
