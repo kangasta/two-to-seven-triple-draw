@@ -1,6 +1,6 @@
 {
   "name": "two-to-seven-triple-draw",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Poker hand solver",
   "main": "build/two-to-seven-triple-draw.js",
   "scripts": {
@@ -12,7 +12,13 @@
     "type": "git",
     "url": "https://github.com/kangasta/two-to-seven-triple-draw.git"
   },
-  "keywords": ["poker", "game", "holdem", "texasholdem", "omahaholdem"],
+  "keywords": [
+    "poker",
+    "game",
+    "holdem",
+    "texasholdem",
+    "omahaholdem"
+  ],
   "author": "Toni Kangas",
   "license": "MIT",
   "bugs": {
