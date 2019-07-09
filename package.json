@@ -2,11 +2,16 @@
   "name": "two-to-seven-triple-draw",
   "version": "0.4.2",
   "description": "Poker hand solver",
-  "main": "build/two-to-seven-triple-draw.js",
+  "main": "dist/two-to-seven-triple-draw.js",
+  "types": "dist/two-to-seven-triple-draw.d.ts",
   "scripts": {
-    "build": "babel src -d build --ignore '**/__tests__/*'",
-    "pretest": "eslint .",
-    "test": "jest"
+    "build": "npm run build:types && npm run build:js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src -d dist --ignore '**/__tests__/*' --extensions \".ts,.tsx\" --source-maps inline",
+    "lint": "eslint --ext .js,.ts .",
+    "pretest": "npm run lint",
+    "test": "jest",
+    "type-check": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -26,12 +31,19 @@
   },
   "homepage": "https://github.com/kangasta/two-to-seven-triple-draw",
   "devDependencies": {
-    "babel": "^6.23.0",
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "^9.0.0",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "eslint": "^5.6.0",
-    "jest": "^23.6.0"
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.5.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/jest": "^24.0.15",
+    "@types/node": "^12.6.1",
+    "@typescript-eslint/eslint-plugin": "^1.11.0",
+    "@typescript-eslint/parser": "^1.11.0",
+    "babel-eslint": "^10.0.2",
+    "babel-jest": "^24.8.0",
+    "eslint": "^6.0.1",
+    "jest": "^24.8.0",
+    "typescript": "^3.5.3"
   }
 }
