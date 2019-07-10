@@ -112,9 +112,13 @@ class Hand {
 
     public static compare(a: Hand, b: Hand): number {
         let r: number;
+
+        if (a.cards.length !== b.cards.length) {
+            throw new Error('Comparing hands with different number of cards');
+        }
         /* eslint-disable no-cond-assign */
         if ((r = b.rank - a.rank) !== 0) return r;
-        for (let i = 0; i < 5 /* TODO this should be dynamic */; i++) {
+        for (let i = 0; i < a.cards.length; i++) {
             if ((r = Card.compare(a.cards[i], b.cards[i])) !== 0) return r;
         }
         /* eslint-enable no-cond-assign */

@@ -73,6 +73,22 @@ describe('Hand', (): void => {
             hands.sort(Hand.compare);
             expect(isSorted(hands, Hand.compare)).toEqual(true);
         });
+        it('does not allow comparing hands with different number of cards', (): void => {
+            const commonCards = asCardsArray([0, 2 + 13, 4, 6 + 13]);
+            const a = new Hand(Hand.Rank.High, commonCards);
+            const b = new Hand(Hand.Rank.High, [...commonCards, new Card(8)]);
+            expect((): number => Hand.compare(a,b)).toThrow();
+        });
+        it('supports hands with less than five cards', (): void => {
+            const a = new Hand(Hand.Rank.High, asCardsArray([0, 2 + 13, 4]));
+            Hand.compare(a,a);
+        });
+        it('supports hands with more than five cards', (): void => {
+            const commonCards = asCardsArray([0, 2 + 13, 4, 6 + 13, 8]);
+            const a = new Hand(Hand.Rank.High, [...commonCards, new Card(9 + 13)]);
+            const b = new Hand(Hand.Rank.High, [...commonCards, new Card(10 + 13)]);
+            expect(Hand.compare(a,b)).toBeGreaterThan(0);
+        });
     });
     describe('winners', (): void => {
         it('returns the winning hands', (): void => {
