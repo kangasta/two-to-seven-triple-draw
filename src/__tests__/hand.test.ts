@@ -48,7 +48,7 @@ describe('Hand', (): void => {
             );
             expect(
                 Hand.solveHoldEm([0, 13, 26, 39, 6], [12, 7, 4, 2], 2).rank
-            ).toEqual(Hand.RANK.THREE_OF_A_KIND);
+            ).toEqual(Hand.Rank.ThreeOfAKind);
         });
     });
     describe('compare', (): void => {
