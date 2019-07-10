@@ -5,18 +5,18 @@ describe('Card', (): void => {
         it('gives string representation of a card', (): void => {
             const card = new Card(13);
             expect(card.toString()).toEqual('ace of spades');
-            expect(card.toString(Card.STRING_TYPE.SHORT)).toEqual('As');
+            expect(card.toString(Card.StringType.Short)).toEqual('As');
         });
         it('supports different formats', (): void => {
             const card = new Card(14);
-            expect(card.toString(Card.STRING_TYPE.LONG)).toEqual('two of spades');
-            expect(card.toString(Card.STRING_TYPE.SHORT)).toEqual('2s');
-            expect(card.toString(Card.STRING_TYPE.SHORT_EMOJI)).toEqual('2♠');
+            expect(card.toString(Card.StringType.Long)).toEqual('two of spades');
+            expect(card.toString(Card.StringType.Short)).toEqual('2s');
+            expect(card.toString(Card.StringType.ShortEmoji)).toEqual('2♠');
         });
     });
     describe('getSuit', (): void =>{
         it('returns suit of card as defined by SUITS', (): void => {
-            const suits = [Card.SUITS.HEARTS, Card.SUITS.SPADES, Card.SUITS.DIAMONDS, Card.SUITS.CLUBS];
+            const suits = [Card.Suits.Hearts, Card.Suits.Spades, Card.Suits.Diamonds, Card.Suits.Clubs];
             for(let i = 0; i < 8; i++) {
                 expect(Card.getSuit(3+i*13)).toEqual(suits[i % 4]);
             }

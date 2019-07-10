@@ -2,6 +2,19 @@ import Card from './card';
 import { uuid4 } from './uuid';
 import { arraySubtraction, getCombinations, last, uniqueFilter } from './arr';
 
+export enum HandRank {
+    High = 0,
+    Pair = 5,
+    TwoPairs = 10,
+    ThreeOfAKind = 15,
+    Straight = 20,
+    Flush = 25,
+    FullHouse = 30,
+    FourOfAKind = 35,
+    StraightFlush = 40,
+    FiveOfAKind = 45 // Requires wild support, which is not currently implemented
+}
+
 class Hand {
     public readonly uuid: string;
     public readonly rank: number;
@@ -12,51 +25,40 @@ class Hand {
         this.uuid = uuid4();
     }
 
-    public getCardsString(cardStrType=Card.STRING_TYPE.SHORT): string {
+    public static readonly Rank = HandRank;
+
+    public getCardsString(cardStrType=Card.StringType.Short): string {
         return this.cards.map((a): string => (new Card(a).toString(cardStrType))).join(', ');
     }
 
-    public toString(cardStrType=Card.STRING_TYPE.SHORT): string {
-        const highStrType = Card.STRING_TYPE.LONG_VALUE;
+    public toString(cardStrType=Card.StringType.Short): string {
+        const highStrType = Card.StringType.LongValue;
         const value = (i: number): string => (new Card(this.cards[i])).toString(highStrType);
         const cardsStr = this.getCardsString(cardStrType);
 
         switch (this.rank) {
-            case Hand.RANK.FIVE_OF_A_KIND:
+            case Hand.Rank.FiveOfAKind:
                 return `Five of a kind, ${value(0)}s (${cardsStr})`;
-            case Hand.RANK.STRAIGHT_FLUSH:
+            case Hand.Rank.StraightFlush:
                 return `Straigth flush, ${value(0)} high (${cardsStr})`;
-            case Hand.RANK.FOUR_OF_A_KIND:
+            case Hand.Rank.FourOfAKind:
                 return `Four of a kind, ${value(0)}s (${cardsStr})`;
-            case Hand.RANK.FULL_HOUSE:
+            case Hand.Rank.FullHouse:
                 return `Full house, ${value(0)}s over ${value(3)}s (${cardsStr})`;
-            case Hand.RANK.FLUSH:
+            case Hand.Rank.Flush:
                 return `Flush, ${value(0)} high (${cardsStr})`;
-            case Hand.RANK.STRAIGHT:
+            case Hand.Rank.Straight:
                 return `Straigth, ${value(0)} high (${cardsStr})`;
-            case Hand.RANK.THREE_OF_A_KIND:
+            case Hand.Rank.ThreeOfAKind:
                 return `Three of a kind, ${value(0)}s (${cardsStr})`;
-            case Hand.RANK.TWO_PAIRS:
+            case Hand.Rank.TwoPairs:
                 return `Two pairs, ${value(0)}s and ${value(2)}s (${cardsStr})`;
-            case Hand.RANK.PAIR:
+            case Hand.Rank.Pair:
                 return `Pair, ${value(0)}s (${cardsStr})`;
-            case Hand.RANK.HIGH:
+            case Hand.Rank.High:
                 return `${value(0).replace(/^\w/, (a: string): string => a.toUpperCase())} high (${cardsStr})`;
         }
         throw new Error('Unsupported rank value');
-    }
-
-    public static RANK = {
-        'HIGH': 0,
-        'PAIR': 5,
-        'TWO_PAIRS': 10,
-        'THREE_OF_A_KIND': 15,
-        'STRAIGHT': 20,
-        'FLUSH': 25,
-        'FULL_HOUSE': 30,
-        'FOUR_OF_A_KIND': 35,
-        'STRAIGHT_FLUSH': 40,
-        'FIVE_OF_A_KIND': 45 // TODO: Requires wild support, which is not currently implemented
     }
 
     public static solve(cards: number[], num=5): Hand {
@@ -65,26 +67,26 @@ class Hand {
 
         /* eslint-disable no-cond-assign */
         if (cardsIncluded = Hand.isNumOfAKind(5, cards)) {
-            handRank = Hand.RANK.FIVE_OF_A_KIND;
+            handRank = Hand.Rank.FiveOfAKind;
         } else if (cardsIncluded = Hand.isStraightFlush(cards, num)) {
-            handRank = Hand.RANK.STRAIGHT_FLUSH;
+            handRank = Hand.Rank.StraightFlush;
         } else if (cardsIncluded = Hand.isNumOfAKind(4, cards)) {
-            handRank = Hand.RANK.FOUR_OF_A_KIND;
+            handRank = Hand.Rank.FourOfAKind;
         } else if (cardsIncluded = Hand.isFullHouse(cards)) {
-            handRank = Hand.RANK.FULL_HOUSE;
+            handRank = Hand.Rank.FullHouse;
         } else if (cardsIncluded = Hand.isFlush(cards, num)) {
-            handRank = Hand.RANK.FLUSH;
+            handRank = Hand.Rank.Flush;
         } else if (cardsIncluded = Hand.isStraight(cards, num)) {
-            handRank = Hand.RANK.STRAIGHT;
+            handRank = Hand.Rank.Straight;
         } else if (cardsIncluded = Hand.isNumOfAKind(3, cards)) {
-            handRank = Hand.RANK.THREE_OF_A_KIND;
+            handRank = Hand.Rank.ThreeOfAKind;
         } else if (cardsIncluded = Hand.isTwoPairs(cards)) {
-            handRank = Hand.RANK.TWO_PAIRS;
+            handRank = Hand.Rank.TwoPairs;
         } else if (cardsIncluded = Hand.isNumOfAKind(2, cards)) {
-            handRank = Hand.RANK.PAIR;
+            handRank = Hand.Rank.Pair;
         } else {
             cardsIncluded = [];
-            handRank = Hand.RANK.HIGH;
+            handRank = Hand.Rank.High;
         }
         /* eslint-enable no-cond-assign */
 

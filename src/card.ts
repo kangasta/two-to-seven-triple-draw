@@ -1,3 +1,21 @@
+export enum CardSuits {
+    Hearts = 0,
+    Spades = 1,
+    Diamonds = 2,
+    Clubs = 3,
+}
+
+export enum CardStringType {
+    Short = 'SHORT',
+    Long = 'LONG',
+    ShortEmoji = 'SHORT_EMOJI',
+    ShortSuit = 'SHORT_SUIT',
+    LongSuit = 'LONG_SUIT',
+    EmojiSuit = 'EMOJI_SUIT',
+    ShortValue = 'SHORT_VALUE',
+    LongValue = 'LONG_VALUE',
+}
+
 class Card {
     public readonly num: number;
     public constructor(num: number) {
@@ -12,71 +30,37 @@ class Card {
         return Card.getValue(this.num);
     }
 
-    public static STRING_TYPE = {
-        'SHORT': 0,
-        'LONG': 1,
-        'SHORT_EMOJI': 2,
-        'SHORT_SUIT': 10,
-        'LONG_SUIT': 11,
-        'EMOJI_SUIT': 12,
-        'SHORT_VALUE': 20,
-        'LONG_VALUE': 21
-    }
+    public static readonly Suits = CardSuits;
+    public static readonly StringType = CardStringType;
 
-    public toString(stringType=Card.STRING_TYPE.LONG): string {
-        const types = Card.STRING_TYPE;
+    private static emojiSuits = ['♥', '♠', '♦', '♣',];
+    private static shortSuits = ['h', 's', 'd', 'c',];
+    private static longSuits = ['hearts', 'spades', 'diamonds', 'clubs',];
+    private static shortValues = ['A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K']
+    private static longValues = ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king']
+
+
+    public toString(stringType=Card.StringType.Long): string {
         switch (stringType) {
-            case types.SHORT:
-                return this.toString(types.SHORT_VALUE) + this.toString(types.SHORT_SUIT);
-            case types.SHORT_EMOJI:
-                return this.toString(types.SHORT_VALUE) + this.toString(types.EMOJI_SUIT);
-            case types.LONG:
-                return this.toString(types.LONG_VALUE) + ' of ' + this.toString(types.LONG_SUIT);
-            case types.SHORT_SUIT:
-                return Card.SHORT_SUITS[this.suit];
-            case types.LONG_SUIT:
-                return Card.LONG_SUITS[this.suit];
-            case types.EMOJI_SUIT:
-                return Card.EMOJI_SUITS[this.suit];
-            case types.SHORT_VALUE:
-                return Card.SHORT_VALUES[this.value === 13 ? 0 : this.value];
-            case types.LONG_VALUE:
-                return Card.LONG_VALUES[this.value === 13 ? 0 : this.value];
+            case Card.StringType.Short:
+                return this.toString(Card.StringType.ShortValue) + this.toString(Card.StringType.ShortSuit);
+            case Card.StringType.ShortEmoji:
+                return this.toString(Card.StringType.ShortValue) + this.toString(Card.StringType.EmojiSuit);
+            case Card.StringType.Long:
+                return this.toString(Card.StringType.LongValue) + ' of ' + this.toString(Card.StringType.LongSuit);
+            case Card.StringType.ShortSuit:
+                return Card.shortSuits[this.suit];
+            case Card.StringType.LongSuit:
+                return Card.longSuits[this.suit];
+            case Card.StringType.EmojiSuit:
+                return Card.emojiSuits[this.suit];
+            case Card.StringType.ShortValue:
+                return Card.shortValues[this.value === 13 ? 0 : this.value];
+            case Card.StringType.LongValue:
+                return Card.longValues[this.value === 13 ? 0 : this.value];
         }
         throw new Error('Unsupported output type');
     }
-
-    public static SUITS = {
-        'HEARTS':    0,
-        'SPADES':    1,
-        'DIAMONDS':  2,
-        'CLUBS':     3
-    }
-
-    private static EMOJI_SUITS = {
-        [Card.SUITS.HEARTS]: '♥',
-        [Card.SUITS.SPADES]: '♠',
-        [Card.SUITS.DIAMONDS]: '♦',
-        [Card.SUITS.CLUBS]: '♣',
-    }
-
-    private static SHORT_SUITS = {
-        [Card.SUITS.HEARTS]: 'h',
-        [Card.SUITS.SPADES]: 's',
-        [Card.SUITS.DIAMONDS]: 'd',
-        [Card.SUITS.CLUBS]: 'c',
-    }
-
-    private static LONG_SUITS = {
-        [Card.SUITS.HEARTS]: 'hearts',
-        [Card.SUITS.SPADES]: 'spades',
-        [Card.SUITS.DIAMONDS]: 'diamonds',
-        [Card.SUITS.CLUBS]: 'clubs',
-    }
-
-    private static SHORT_VALUES = ['A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K']
-
-    private static LONG_VALUES = ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king']
 
     public static getSuit(num: number): number {
         return Math.floor(num/13) % 4;
