@@ -1,4 +1,4 @@
-import Card from '../card';
+import Card, { CardStringType } from '../card';
 
 describe('Card', (): void => {
     describe('toString', (): void => {
@@ -12,6 +12,10 @@ describe('Card', (): void => {
             expect(card.toString(Card.StringType.Long)).toEqual('two of spades');
             expect(card.toString(Card.StringType.Short)).toEqual('2s');
             expect(card.toString(Card.StringType.ShortEmoji)).toEqual('2♠');
+        });
+        it('throws on unsupported type', (): void => {
+            const card = new Card(14);
+            expect((): string => card.toString(-20 as unknown as CardStringType)).toThrow();
         });
     });
     describe('getSuit', (): void =>{

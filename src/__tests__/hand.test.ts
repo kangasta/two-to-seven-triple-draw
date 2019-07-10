@@ -1,4 +1,4 @@
-import Hand from '../hand';
+import Hand, { HandRank } from '../hand';
 import { isSorted, shuffle } from '../arr';
 import Card from '../card';
 
@@ -23,6 +23,15 @@ describe('Hand', (): void => {
                 str = Hand.solve(asCardsArray(hands[i].cards)).toString();
                 expect(str).toEqual(hands[i].string);
             }
+        });
+        it('supports custom format for cards string', (): void => {
+            const hand = new Hand(Hand.Rank.High, asCardsArray([5, 4, 3]));
+            expect(hand.getCardsString()).toEqual('6h, 5h, 4h');
+            expect(hand.toString(Card.StringType.ShortEmoji)).toEqual('Six high (6♥, 5♥, 4♥)');
+        });
+        it('throws on unsupported rank', (): void => {
+            const hand = new Hand(-5 as unknown as HandRank, []);
+            expect((): string => hand.toString()).toThrow();
         });
     });
     describe('solve', (): void => {
