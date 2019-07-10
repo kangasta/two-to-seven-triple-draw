@@ -36,9 +36,9 @@ describe('Card', (): void => {
     });
     describe('compare', (): void => {
         it('can be used to sort cards highest first', (): void => {
-            const cards = [0, 1 + 13, 2 + 26, 2, 3, 4];
+            const cards = [0, 1 + 13, 2 + 26, 2, 3, 4].map((a: number): Card => new Card(a));
             cards.sort(Card.compare);
-            expect(cards).toEqual([0, 4, 3, 28, 2, 14]);
+            expect(cards.map((a: Card): number => a.num)).toEqual([0, 4, 3, 28, 2, 14]);
         });
     });
 });

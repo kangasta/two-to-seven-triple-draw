@@ -18,8 +18,8 @@ export enum HandRank {
 class Hand {
     public readonly uuid: string;
     public readonly rank: number;
-    public readonly cards: number[];
-    public constructor(rank: number, cards: number[]) {
+    public readonly cards: Card[];
+    public constructor(rank: number, cards: Card[]) {
         this.rank = rank;
         this.cards = cards;
         this.uuid = uuid4();
@@ -28,12 +28,12 @@ class Hand {
     public static readonly Rank = HandRank;
 
     public getCardsString(cardStrType=Card.StringType.Short): string {
-        return this.cards.map((a): string => (new Card(a).toString(cardStrType))).join(', ');
+        return this.cards.map((a: Card): string => (a.toString(cardStrType))).join(', ');
     }
 
     public toString(cardStrType=Card.StringType.Short): string {
         const highStrType = Card.StringType.LongValue;
-        const value = (i: number): string => (new Card(this.cards[i])).toString(highStrType);
+        const value = (i: number): string => (this.cards[i]).toString(highStrType);
         const cardsStr = this.getCardsString(cardStrType);
 
         switch (this.rank) {
@@ -61,7 +61,7 @@ class Hand {
         throw new Error('Unsupported rank value');
     }
 
-    public static solve(cards: number[], num=5): Hand {
+    public static solve(cards: Card[], num=5): Hand {
         let cardsIncluded;
         let handRank;
 
@@ -90,12 +90,12 @@ class Hand {
         }
         /* eslint-enable no-cond-assign */
 
-        cardsIncluded = Hand.fillWithKickers(cardsIncluded as number[], cards);
+        cardsIncluded = Hand.fillWithKickers(cardsIncluded as Card[], cards);
 
         return new Hand(handRank, cardsIncluded);
     }
 
-    public static solveHoldEm(tableCards: number[], handCards: number[], mustUse=0): Hand {
+    public static solveHoldEm(tableCards: Card[], handCards: Card[], mustUse=0): Hand {
         if (mustUse === 0) return Hand.solve([...tableCards, ...handCards]);
 
         const tableCombinations = getCombinations(tableCards, tableCards.length - mustUse);
@@ -111,10 +111,10 @@ class Hand {
     }
 
     public static compare(a: Hand, b: Hand): number {
-        let r;
+        let r: number;
         /* eslint-disable no-cond-assign */
         if ((r = b.rank - a.rank) !== 0) return r;
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 5 /* TODO this should be dynamic */; i++) {
             if ((r = Card.compare(a.cards[i], b.cards[i])) !== 0) return r;
         }
         /* eslint-enable no-cond-assign */
@@ -131,43 +131,43 @@ class Hand {
         return arr.reduce((a: Hand, b: Hand): Hand => max2(a, b));
     }
 
-    private static fillWithKickers(cardsIncluded: number[], cards: number[], num=5): number[] {
+    private static fillWithKickers(cardsIncluded: Card[], cards: Card[], num=5): Card[] {
         cards = arraySubtraction(cards, cardsIncluded).sort(Card.compare);
         return [...cardsIncluded, ...cards].slice(0,num);
     }
 
-    private static getUniqueValues(cards: number[]): number[] {
+    private static getUniqueValues(cards: Card[]): number[] {
         return cards.
-            map((a: number): number => Card.getValue(a)).
+            map((a: Card): number => a.value).
             filter(uniqueFilter).
             sort((a: number, b: number): number => (b - a));
     }
 
-    public static isNumOfAKind(num: number, cards: number[]): number[] | boolean {
+    public static isNumOfAKind(num: number, cards: Card[]): Card[] | boolean {
         const unique = Hand.getUniqueValues(cards);
         let cardsIncluded;
         for (let i = 0; i < unique.length; i++) {
-            cardsIncluded = cards.filter((a: number): boolean => (Card.getValue(a) == unique[i]));
+            cardsIncluded = cards.filter((a: Card): boolean => (a.value == unique[i]));
             if (cardsIncluded.length >= num) return cardsIncluded;
         }
         return false;
     }
 
-    public static isNumOfAKindCombination(nums: number[], cards: number[]): number[] | boolean {
+    public static isNumOfAKindCombination(nums: number[], cards: Card[]): Card[] | boolean {
         const cardsIncluded = [];
         for (let i = 0; i < nums.length; i++) {
             let numOfAKind = Hand.isNumOfAKind(nums[i], arraySubtraction(cards, cardsIncluded));
             if (numOfAKind === false) return false;
-            numOfAKind = numOfAKind as number[];
+            numOfAKind = numOfAKind as Card[];
             cardsIncluded.push(...numOfAKind);
         }
         return cardsIncluded;
     }
 
-    public static isStraightFlush(cards: number[], num=5): number[] | boolean {
+    public static isStraightFlush(cards: Card[], num=5): Card[] | boolean {
         let flush = [];
         for (let i = 0; i < 4; i++) {
-            flush = cards.filter((a: number): boolean => Card.getSuit(a) === i);
+            flush = cards.filter((a: Card): boolean => a.suit === i);
             if (flush.length < num) continue;
             const straight = Hand.isStraight(flush, num);
             if (straight) return straight;
@@ -175,19 +175,19 @@ class Hand {
         return false;
     }
 
-    public static isFullHouse(cards: number[]): number[] | boolean {
+    public static isFullHouse(cards: Card[]): Card[] | boolean {
         return Hand.isNumOfAKindCombination([3,2], cards);
     }
 
-    public static isFlush(cards: number[], num=5): number[] | boolean {
+    public static isFlush(cards: Card[], num=5): Card[] | boolean {
         for (let i = 0; i < 4; i++) {
-            const suited = cards.filter((a: number): boolean => (Card.getSuit(a) == i));
+            const suited = cards.filter((a: Card): boolean => (a.suit == i));
             if (suited.length >= num) return suited.sort(Card.compare).slice(0,num);
         }
         return false;
     }
 
-    public static isStraight(cards: number[], num=5): number[] | boolean {
+    public static isStraight(cards: Card[], num=5): Card[] | boolean {
         const unique = Hand.getUniqueValues(cards);
 
         if (unique.length < num) return false;
@@ -203,15 +203,15 @@ class Hand {
         }
         if (valuesIncluded.length == num) {
             return valuesIncluded.map(
-                (a: number): number | undefined => (
-                    cards.find((b: number): boolean => (Card.getValue(b) === (a ? a : 13)))
+                (a: number): Card | undefined => (
+                    cards.find((b: Card): boolean => (b.value === (a ? a : 13)))
                 )
-            ) as number[];
+            ) as Card[];
         }
         return false;
     }
 
-    public static isTwoPairs(cards: number[]): number[] | boolean {
+    public static isTwoPairs(cards: Card[]): Card[] | boolean {
         return Hand.isNumOfAKindCombination([2,2], cards);
     }
 }
