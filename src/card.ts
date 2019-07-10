@@ -70,8 +70,8 @@ class Card {
         return num % 13 || lowAce ? num % 13 : 13;
     }
 
-    public static compare(a: number, b: number): number {
-        return Card.getValue(b) - Card.getValue(a);
+    public static compare(a: Card, b: Card): number {
+        return b.value - a.value;
     }
 }
 
