@@ -1,4 +1,4 @@
-import Card, {CardJSON} from './card';
+import Card, { CardJSON } from './card';
 import { uuid4 } from './uuid';
 import { arraySubtraction, getCombinations, last, uniqueFilter } from './arr';
 

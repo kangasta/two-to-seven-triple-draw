@@ -21,6 +21,11 @@ describe('isSorted', (): void => {
         expect(isSorted([5, 4, 2, 3, 1], gt)).toEqual(false);
         expect(isSorted([5, 4, 3, 2, 1], gt)).toEqual(true);
     });
+    it('supports reversing compare function', (): void => {
+        const lt = (a: number, b: number): number => (a - b);
+        expect(isSorted([5, 4, 3, 2, 1], lt)).toEqual(false);
+        expect(isSorted([5, 4, 3, 2, 1], lt, true)).toEqual(true);
+    });
 });
 describe('last', (): void => {
     it('returns last element of array', (): void => {
