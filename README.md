@@ -15,16 +15,23 @@ Poker hand solver. Supports:
 npm i two-to-seven-triple-draw
 ```
 
-## Usage
+## Usage example
 
 ```js
 Hand = require('two-to-seven-triple-draw').Hand;
+Card = require('two-to-seven-triple-draw').Card;
 
 // Solve five card hand
-const acequads = Hand.solve([0, 13, 26, 39, 2]);
+const acequads = Hand.solve(
+    [0, 13, 26, 39, 2].map(i => new Card(i))
+);
 
 // Solve Omaha hold em hand
-const fullhouse = Hand.solveHoldEm([0, 13, 26, 39, 2], [25, 38, 11, 24], 2);
+const fullhouse = Hand.solveHoldEm(
+    [0, 13, 26, 39, 2].map(i => new Card(i)),
+    [25, 38, 11, 24].map(i => new Card(i)),
+    2
+);
 
 // Get best hand
 console.log(Hand.max(acequads, fullhouse).toString());
@@ -36,9 +43,9 @@ This package provides two classes: Card and Hand. Card class implements logic fo
 
 ### Card
 
-Card provides static methods `Card.getSuit(num)`, `Card.getValue(num)`, `Card.compare(a, b)`. The `Card.compare(...)` method can be used to sort cards from high to low.
+Card provides gettes for the suit and value of the card as well as static methods `Card.getSuit(num)`, `Card.getValue(num)`, and `Card.compare(cardA, cardB)`. The `Card.compare(...)` method can be used to sort cards from high to low.
 
-Cards are passed around as integers. The suit of the cards is defined as `Math.floor(num/13) % 4`. The output integer maps to card suit as:
+Cards are passed around as Cards. The suit of the cards is defined as `Math.floor(num/13) % 4`. The output integer maps to card suit as:
 
 Integer | Suit
 ------- | -------
@@ -51,16 +58,19 @@ The value of the card is defined as `num % 13 || low_ace ? 0 : 13`. This results
 
 ### Hand
 
-Hand provides `Hand.solve(cards, num=5)`, `Hand.solveHoldEm(table_cards, hand_cards, must_use=0)`, `Hand.compare(a, b)`, and `Hand.max([hand1[, hand2[, ...]]])` functions to solve and compare poker hands. `Hand.solveHoldEm(...)` is a helper function to support games where N number of cards from players hand cards must be used, such as Omaha hold em. Hand is passed in to the solver as a array of numbers. Solver returns object with fields for rank of the hand and cards included in the hand. For example, ace to five straight-flush would result to:
+Hand provides `Hand.solve(cards, num=5)`, `Hand.solveHoldEm(table_cards, hand_cards, must_use=0)`, `Hand.compare(a, b)`, and `Hand.max([hand1[, hand2[, ...]]])` functions to solve and compare poker hands. `Hand.solveHoldEm(...)` is a helper function to support games where N number of cards from players hand cards must be used, such as Omaha hold em. Hand is passed in to the solver as a array of Cards. Solver returns object with fields for uuid, rank of the hand and cards included in the hand. For example, ace to five straight-flush would result to:
 
 ```json
 {
-	"rank": 45,
-	"cards": [0, 4, 3, 2, 1]
+    "uuid": "2d82f594-579b-4dbe-ae06-187c66229734",
+    "rank": 40,
+    "cards": [
+        {"num":4}, {"num":3}, {"num":2}, {"num":1}, {"num":0}
+    ]
 }
 ```
 
-where the number for hand rank is the one defined in `Hand.RANK`:
+where the number for hand rank is the one defined in `Hand.Rank`:
 
 Number | Hand
 ------ | ------------
