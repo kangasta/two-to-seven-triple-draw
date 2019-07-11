@@ -27,7 +27,20 @@ class Deck {
         return !isSorted(this.cards, (a: Card,b: Card): number => (a.num - b.num));
     }
 
+    public get cardsRemaining(): number {
+        return this.cards.length;
+    }
+
     public pop(): Card | undefined { return this.cards.pop(); }
+    public popN(n: number): Card[] {
+        const cards = [];
+        let card;
+
+        // eslint-disable-next-line no-cond-assign
+        for (let i = 0; (i < n) && (card = this.pop()); i++) { cards.push(card); }
+
+        return cards;
+    }
 }
 
 export default Deck;
