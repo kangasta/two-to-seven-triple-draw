@@ -39,11 +39,13 @@ console.log(Hand.max(acequads, fullhouse).toString());
 
 ## Documentation
 
-This package provides two classes: Card and Hand. Card class implements logic for comparing and handling cards, which are passed around as integers. Hand class implements logit for comparing and solving poker hands, which are created from arrays of integers.
+This package provides three classes: Card, Deck and Hand. Card class implements logic for comparing and handling cards, which are passed around as Cards. Deck class provides an implementation to generate shuffled or unshuffled array of cards. Hand class implements logit for comparing and solving poker hands, which are created from arrays of integers.
+
+All of the classed provide a static method `fromJSON(...)` which allows regenerating an instance of a respective class.
 
 ### Card
 
-Card provides gettes for the suit and value of the card as well as static methods `Card.getSuit(num)`, `Card.getValue(num)`, and `Card.compare(cardA, cardB)`. The `Card.compare(...)` method can be used to sort cards from high to low.
+Card provides getters for the suit and value of the card as well as static methods `Card.getSuit(num)`, `Card.getValue(num)`, and `Card.compare(cardA, cardB)`. The `Card.compare(...)` method can be used to sort cards from high to low.
 
 Cards are passed around as Cards. The suit of the cards is defined as `Math.floor(num/13) % 4`. The output integer maps to card suit as:
 
@@ -55,6 +57,10 @@ Integer | Suit
    3    |  ♣ Clubs
 
 The value of the card is defined as `num % 13 || low_ace ? 0 : 13`. This results to value being represented as one smaller than it would be in an actual playing card. Aces are high by default.
+
+### Deck
+
+Deck provides a pop method to get the next available card as a Card object, `popN(n)` method to get multiple cards at a time, `cardsRemaining` getter to check number of cards left in the Deck, and methods to shuffle as well as to check if the Deck is shuffled.
 
 ### Hand
 
