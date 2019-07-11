@@ -2,11 +2,6 @@ import Hand, { HandRank } from '../hand';
 import { isSorted, shuffle } from '../arr';
 import Card from '../card';
 
-interface HandJSON {
-    rank: number;
-    cards: number[];
-}
-
 describe('Hand', (): void => {
     const withoutUuid = (hand: Hand): object => ({
         'rank': hand.rank,
@@ -71,7 +66,7 @@ describe('Hand', (): void => {
     describe('compare', (): void => {
         it('can be used to sort hands from high to low', (): void => {
             const hands = require('./hand-testdata.json').hands.map(
-                ({rank, cards}: HandJSON): Hand => new Hand(rank, asCardsArray(cards))
+                ({rank, cards}: {rank: number; cards: number[]}): Hand => new Hand(rank, asCardsArray(cards))
             );
 
             expect(isSorted(hands, Hand.compare)).toEqual(true);

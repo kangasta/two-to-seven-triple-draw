@@ -1,6 +1,12 @@
-import Card from './card';
+import Card, {CardJSON} from './card';
 import { uuid4 } from './uuid';
 import { arraySubtraction, getCombinations, last, uniqueFilter } from './arr';
+
+export interface HandJSON {
+    rank: number;
+    cards: CardJSON[];
+    uuid?: string;
+}
 
 export enum HandRank {
     High = 0,
@@ -19,10 +25,14 @@ class Hand {
     public readonly uuid: string;
     public readonly rank: number;
     public readonly cards: Card[];
-    public constructor(rank: number, cards: Card[]) {
+    public constructor(rank: number, cards: Card[], uuid?: undefined | string) {
         this.rank = rank;
         this.cards = cards;
-        this.uuid = uuid4();
+        this.uuid = uuid ? uuid : uuid4();
+    }
+
+    public static fromJSON({rank, cards, uuid}: HandJSON): Hand {
+        return new Hand(rank, cards.map(Card.fromJSON), uuid);
     }
 
     public static readonly Rank = HandRank;
