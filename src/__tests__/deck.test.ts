@@ -3,11 +3,7 @@ import { isSorted } from '../arr';
 
 describe('Deck', (): void => {
     const asCardsArray = (deck: Deck): Card[] => {
-        const cards = [];
-        let card;
-
-        while (card = deck.pop()) { cards.push(card); } // eslint-disable-line no-cond-assign
-        return cards;
+        return deck.popN(deck.cardsRemaining);
     };
 
     const compareCardNums = (a: Card,b: Card): number => (a.num - b.num);
@@ -31,5 +27,21 @@ describe('Deck', (): void => {
 
         deck.shuffle();
         expect(deck.isShuffled()).toBe(true);
+    });
+    it('provides a method to get multiple cards at time', (): void => {
+        const deck = new Deck();
+
+        let cards = deck.popN(30);
+        expect(cards).toHaveLength(30);
+
+        cards = deck.popN(30);
+        expect(cards).toHaveLength(22);
+    });
+    it('provides method to check number of cards remaining', (): void => {
+        const deck = new Deck(true, 3);
+
+        expect(deck.cardsRemaining).toEqual(52 * 3);
+        expect(deck.popN(52)).toHaveLength(52);
+        expect(deck.cardsRemaining).toEqual(52 * 2);
     });
 });
