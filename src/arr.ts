@@ -23,10 +23,12 @@ const getCombinations = <T>(arr: T[], n: number): T[][] => {
     return out;
 };
 
-const isSorted = <T>(arr: T[], func: (a: T,b: T) => number): boolean => {
+const isSorted = <T>(arr: T[], func: (a: T,b: T) => number, reverse=false): boolean => {
+    const order = reverse ? -1 : 1;
+
     try {
         arr.reduce((acc: T, cur: T): T => {
-            if (func(acc, cur) <= 0) return cur;
+            if (order * (func(acc, cur)) <= 0) return cur;
             throw new Error();
         });
         return true;
