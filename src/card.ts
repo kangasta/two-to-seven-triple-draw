@@ -1,3 +1,7 @@
+export interface CardJSON {
+    num: number;
+}
+
 export enum CardSuits {
     Hearts = 0,
     Spades = 1,
@@ -20,6 +24,10 @@ class Card {
     public readonly num: number;
     public constructor(num: number) {
         this.num = num;
+    }
+
+    public static fromJSON({num}: CardJSON): Card {
+        return new Card(num);
     }
 
     public get suit(): number {
