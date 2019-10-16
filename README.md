@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/kangasta/two-to-seven-triple-draw.svg?branch=master)](https://travis-ci.org/kangasta/two-to-seven-triple-draw)
 
 Poker hand solver. Supports:
+
 - solving the best hand from up to nine cards.
 - solving hands from single array input.
 - solving hands from table and hand card array inputs when N cards from the hand array must be used to form the hand.
