@@ -18,7 +18,11 @@ describe('arraySubtraction', (): void => {
 describe('getCombinations', (): void => {
   it('gives all possible n element combinations from an array', (): void => {
     expect(getCombinations([1, 2, 3], 1)).toEqual([[1], [2], [3]]);
-    expect(getCombinations([1, 2, 3], 2)).toEqual([[1, 2], [1, 3], [2, 3]]);
+    expect(getCombinations([1, 2, 3], 2)).toEqual([
+      [1, 2],
+      [1, 3],
+      [2, 3]
+    ]);
     expect(getCombinations([1, 2, 3], 3)).toEqual([[1, 2, 3]]);
   });
 });
