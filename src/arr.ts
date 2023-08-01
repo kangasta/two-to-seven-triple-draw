@@ -7,7 +7,7 @@ const getCombinationsHelper = <T>(
   num: number,
   index: number,
   combination: T[],
-  output: T[][]
+  output: T[][],
 ): void => {
   if (combination.length >= num) {
     output.push(combination);
@@ -18,7 +18,7 @@ const getCombinationsHelper = <T>(
         num,
         i + 1,
         combination.concat(array[i]),
-        output
+        output,
       );
     }
   }
@@ -33,17 +33,15 @@ const getCombinations = <T>(arr: T[], n: number): T[][] => {
 const isSorted = <T>(
   arr: T[],
   func: (a: T, b: T) => number,
-  reverse = false
+  reverse = false,
 ): boolean => {
   const order = reverse ? -1 : 1;
 
   try {
-    arr.reduce(
-      (acc: T, cur: T): T => {
-        if (order * func(acc, cur) <= 0) return cur;
-        throw new Error();
-      }
-    );
+    arr.reduce((acc: T, cur: T): T => {
+      if (order * func(acc, cur) <= 0) return cur;
+      throw new Error();
+    });
     return true;
   } catch (_) {
     return false;
@@ -71,5 +69,5 @@ export {
   isSorted,
   last,
   shuffle,
-  uniqueFilter
+  uniqueFilter,
 };

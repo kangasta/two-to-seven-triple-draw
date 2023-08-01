@@ -13,10 +13,7 @@ const hexString = (len: number): string => {
 const uuid4 = (): string => {
   const lens = [8, 4, 4, 4, 12];
 
-  const str = lens
-    .map(hexString)
-    .join('-')
-    .split('');
+  const str = lens.map(hexString).join('-').split('');
   str[14] = '4';
   str[19] = ((Math.floor(Math.random() * 64) % 4) + 8).toString(16);
   return str.join('');

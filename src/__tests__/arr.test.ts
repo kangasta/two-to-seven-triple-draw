@@ -4,7 +4,7 @@ import {
   isSorted,
   last,
   shuffle,
-  uniqueFilter
+  uniqueFilter,
 } from '../arr';
 
 describe('arraySubtraction', (): void => {
@@ -21,7 +21,7 @@ describe('getCombinations', (): void => {
     expect(getCombinations([1, 2, 3], 2)).toEqual([
       [1, 2],
       [1, 3],
-      [2, 3]
+      [2, 3],
     ]);
     expect(getCombinations([1, 2, 3], 3)).toEqual([[1, 2, 3]]);
   });

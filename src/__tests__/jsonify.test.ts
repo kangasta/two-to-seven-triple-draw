@@ -14,10 +14,10 @@ interface ComponentUnderTest {
     name: 'Hand',
     class: Hand,
     parameters: [
-      [0, [0, 2, 4, 6 + 13, 8].map((i: number): Card => new Card(i))]
-    ]
+      [0, [0, 2, 4, 6 + 13, 8].map((i: number): Card => new Card(i))],
+    ],
   },
-  { name: 'Deck', class: Deck, parameters: [[true, 1]] }
+  { name: 'Deck', class: Deck, parameters: [[true, 1]] },
 ].forEach((CUT: ComponentUnderTest): void => {
   describe(CUT.name, (): void => {
     it('allows stringifying and has fromJSON function to parse from JSON', (): void => {

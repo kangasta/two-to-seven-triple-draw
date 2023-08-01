@@ -18,7 +18,7 @@ export enum HandRank {
   FullHouse = 30,
   FourOfAKind = 35,
   StraightFlush = 40,
-  FiveOfAKind = 45 // Requires wild support, which is not currently implemented
+  FiveOfAKind = 45, // Requires wild support, which is not currently implemented
 }
 
 class Hand {
@@ -69,7 +69,7 @@ class Hand {
         return `Pair, ${value(0)}s (${cardsStr})`;
       case Hand.Rank.High:
         return `${value(0).replace(/^\w/, (a: string): string =>
-          a.toUpperCase()
+          a.toUpperCase(),
         )} high (${cardsStr})`;
     }
     throw new Error('Unsupported rank value');
@@ -112,23 +112,23 @@ class Hand {
   public static solveHoldEm(
     tableCards: Card[],
     handCards: Card[],
-    mustUse = 0
+    mustUse = 0,
   ): Hand {
     if (mustUse === 0) return Hand.solve([...tableCards, ...handCards]);
 
     const tableCombinations = getCombinations(
       tableCards,
-      tableCards.length - mustUse
+      tableCards.length - mustUse,
     );
     const handCombinations = getCombinations(
       handCards,
-      Math.min(handCards.length, mustUse)
+      Math.min(handCards.length, mustUse),
     );
     const hands = [];
     for (let i = 0; i < tableCombinations.length; i++) {
       for (let j = 0; j < handCombinations.length; j++) {
         hands.push(
-          Hand.solve([...tableCombinations[i], ...handCombinations[j]])
+          Hand.solve([...tableCombinations[i], ...handCombinations[j]]),
         );
       }
     }
@@ -164,7 +164,7 @@ class Hand {
   private static fillWithKickers(
     cardsIncluded: Card[],
     cards: Card[],
-    num = 5
+    num = 5,
   ): Card[] {
     cards = arraySubtraction(cards, cardsIncluded).sort(Card.compare);
     return [...cardsIncluded, ...cards].slice(0, num);
@@ -189,13 +189,13 @@ class Hand {
 
   public static isNumOfAKindCombination(
     nums: number[],
-    cards: Card[]
+    cards: Card[],
   ): Card[] | boolean {
     const cardsIncluded = [];
     for (let i = 0; i < nums.length; i++) {
       let numOfAKind = Hand.isNumOfAKind(
         nums[i],
-        arraySubtraction(cards, cardsIncluded)
+        arraySubtraction(cards, cardsIncluded),
       );
       if (numOfAKind === false) return false;
       numOfAKind = numOfAKind as Card[];
@@ -243,7 +243,7 @@ class Hand {
     }
     if (valuesIncluded.length == num) {
       return valuesIncluded.map((a: number): Card | undefined =>
-        cards.find((b: Card): boolean => b.value === (a ? a : 13))
+        cards.find((b: Card): boolean => b.value === (a ? a : 13)),
       ) as Card[];
     }
     return false;
