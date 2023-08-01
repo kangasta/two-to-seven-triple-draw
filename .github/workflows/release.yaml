@@ -37,3 +37,11 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload package to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: two-to-seven-triple-draw-*.tgz
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
