@@ -1,5 +1,6 @@
 /.github
 /coverage
+/dist/__tests__/
 /src
 
 .babelrc
