@@ -1,6 +1,9 @@
+/.github
 /coverage
 /src
 
 .babelrc
 .eslint*
-.travis.yml
+.prettier*
+tsconfig.json
+two-to-seven-triple-draw-0.6.2.tgz
