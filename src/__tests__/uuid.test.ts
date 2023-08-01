@@ -10,11 +10,7 @@ describe('uuid4', (): void => {
     for (let i = 0; i < 32; i++) {
       curr = uuid4();
       expect(curr.split('-').map((a: string): number => a.length)).toEqual([
-        8,
-        4,
-        4,
-        4,
-        12
+        8, 4, 4, 4, 12,
       ]);
       expect(curr.split('')[14]).toEqual('4');
       expect(char19.includes(curr.split('')[19])).toEqual(true);
@@ -31,7 +27,7 @@ describe('uuid4', (): void => {
     expect(
       uuid4()
         .split('-')
-        .map((a: string): number => a.length)
+        .map((a: string): number => a.length),
     ).toEqual([8, 4, 4, 4, 12]);
   });
 });

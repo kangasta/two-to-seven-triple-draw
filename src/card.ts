@@ -6,7 +6,7 @@ export enum CardSuits {
   Hearts = 0,
   Spades = 1,
   Diamonds = 2,
-  Clubs = 3
+  Clubs = 3,
 }
 
 export enum CardStringType {
@@ -17,7 +17,7 @@ export enum CardStringType {
   LongSuit = 'LONG_SUIT',
   EmojiSuit = 'EMOJI_SUIT',
   ShortValue = 'SHORT_VALUE',
-  LongValue = 'LONG_VALUE'
+  LongValue = 'LONG_VALUE',
 }
 
 class Card {
@@ -57,7 +57,7 @@ class Card {
     'T',
     'J',
     'Q',
-    'K'
+    'K',
   ];
   private static longValues = [
     'ace',
@@ -72,7 +72,7 @@ class Card {
     'ten',
     'jack',
     'queen',
-    'king'
+    'king',
   ];
 
   public toString(stringType = Card.StringType.Long): string {

@@ -9,7 +9,7 @@ class Deck {
   private cards: Card[];
   public constructor(shuffleDeck = true, numDecks = 1) {
     this.cards = [...Array(52 * numDecks).keys()].map(
-      (i: number): Card => new Card(i)
+      (i: number): Card => new Card(i),
     );
 
     if (shuffleDeck) {
