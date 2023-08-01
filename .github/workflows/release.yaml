@@ -5,7 +5,7 @@ on:
       - '*'
 
 jobs:
-  npm:
+  release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -25,8 +25,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           registry-url: 'https://npm.pkg.github.com'
+          scope: "@kangasta"
       - name: Publish package
-        run: npm publish
+        run: |
+          echo "registry=https://npm.pkg.github.com/@kangasta" >> .npmrc
+          npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload package to release
