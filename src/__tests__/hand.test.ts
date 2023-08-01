@@ -2,6 +2,8 @@ import Hand, { HandRank } from '../hand';
 import { isSorted, shuffle } from '../arr';
 import Card from '../card';
 
+import * as testdata from './hand-testdata.json';
+
 describe('Hand', (): void => {
   const withoutUuid = (hand: Hand): object => ({
     rank: hand.rank,
@@ -13,7 +15,7 @@ describe('Hand', (): void => {
 
   describe('toString', (): void => {
     it('solves hands correctly', (): void => {
-      const hands = require('./hand-testdata.json').strings;
+      const hands = testdata.strings;
       let str;
       for (let i = 0; i < hands.length; i++) {
         str = Hand.solve(asCardsArray(hands[i].cards)).toString();
@@ -34,7 +36,7 @@ describe('Hand', (): void => {
   });
   describe('solve', (): void => {
     it('solves hands correctly', (): void => {
-      const hands = require('./hand-testdata.json').hands;
+      const hands = testdata.hands;
       let solved;
       for (let i = 0; i < hands.length; i++) {
         solved = Hand.solve(asCardsArray(hands[i].cards));
@@ -82,7 +84,7 @@ describe('Hand', (): void => {
   });
   describe('compare', (): void => {
     it('can be used to sort hands from high to low', (): void => {
-      const hands = require('./hand-testdata.json').hands.map(
+      const hands = testdata.hands.map(
         ({ rank, cards }: { rank: number; cards: number[] }): Hand =>
           new Hand(rank, asCardsArray(cards)),
       );
