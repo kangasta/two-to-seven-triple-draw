@@ -64,6 +64,10 @@ export class Cards extends Array<Card> {
       arr.forEach((i) => this.push(new Card(i)));
     }
   }
+
+  public toString(stringType = Card.StringType.Long): string {
+    return this.map(card => card.toString(stringType)).join(', ')
+  }
 }
 
 class Card {

@@ -2,137 +2,137 @@
   "hands": [
     {
       "rank": 45,
-      "cards": [0, 13, 26, 39, 52]
+      "cards": "A♥, A♠, A♦, A♣, A♥"
     },
     {
       "rank": 45,
-      "cards": [10, 23, 36, 49, 62]
+      "cards": "J♥, J♠, J♦, J♣, J♥"
     },
     {
       "rank": 40,
-      "cards": [13, 14, 15, 16, 17]
+      "cards": "A♠, 2♠, 3♠, 4♠, 5♠"
     },
     {
       "rank": 40,
-      "cards": [21, 22, 23, 24, 25]
+      "cards": "9♠, T♠, J♠, Q♠, K♠"
     },
     {
       "rank": 35,
-      "cards": [0, 13, 26, 39, 12]
+      "cards": "A♥, A♠, A♦, A♣, K♥"
     },
     {
       "rank": 35,
-      "cards": [0, 13, 26, 39, 10]
+      "cards": "A♥, A♠, A♦, A♣, J♥"
     },
     {
       "rank": 35,
-      "cards": [10, 23, 36, 49, 12]
+      "cards": "J♥, J♠, J♦, J♣, K♥"
     },
     {
       "rank": 30,
-      "cards": [25, 38, 51, 10, 23]
+      "cards": "K♠, K♦, K♣, J♥, J♠"
     },
     {
       "rank": 30,
-      "cards": [10, 23, 36, 21, 34]
+      "cards": "J♥, J♠, J♦, 9♠, 9♦"
     },
     {
       "rank": 25,
-      "cards": [0, 11, 10, 9, 8]
+      "cards": "A♥, Q♥, J♥, T♥, 9♥"
     },
     {
       "rank": 25,
-      "cards": [25, 24, 22, 21, 20]
+      "cards": "K♠, Q♠, T♠, 9♠, 8♠"
     },
     {
       "rank": 20,
-      "cards": [0, 25, 37, 49, 9]
+      "cards": "A♥, K♠, Q♦, J♣, T♥"
     },
     {
       "rank": 20,
-      "cards": [0, 14, 28, 42, 4]
+      "cards": "A♥, 2♠, 3♦, 4♣, 5♥"
     },
     {
       "rank": 15,
-      "cards": [0, 13, 26, 12, 11]
+      "cards": "A♥, A♠, A♦, K♥, Q♥"
     },
     {
       "rank": 15,
-      "cards": [0, 13, 26, 12, 10]
+      "cards": "A♥, A♠, A♦, K♥, J♥"
     },
     {
       "rank": 15,
-      "cards": [10, 23, 36, 7, 12]
+      "cards": "J♥, J♠, J♦, 8♥, K♥"
     },
     {
       "rank": 10,
-      "cards": [25, 38, 10, 23, 47]
+      "cards": "K♠, K♦, J♥, J♠, 9♣"
     },
     {
       "rank": 10,
-      "cards": [10, 23, 21, 34, 35]
+      "cards": "J♥, J♠, 9♠, 9♦, T♦"
     },
     {
       "rank": 5,
-      "cards": [0, 13, 12, 11, 10]
+      "cards": "A♥, A♠, K♥, Q♥, J♥"
     },
     {
       "rank": 5,
-      "cards": [0, 13, 12, 11, 9]
+      "cards": "A♥, A♠, K♥, Q♥, T♥"
     },
     {
       "rank": 5,
-      "cards": [10, 23, 12, 8, 7]
+      "cards": "J♥, J♠, K♥, 9♥, 8♥"
     },
     {
       "rank": 0,
-      "cards": [7, 19, 3, 2, 1]
+      "cards": "8♥, 7♠, 4♥, 3♥, 2♥"
     },
     {
       "rank": 0,
-      "cards": [19, 5, 16, 15, 14]
+      "cards": "7♠, 6♥, 4♠, 3♠, 2♠"
     }
   ],
   "strings": [
     {
       "string": "Five of a kind, aces (Ah, As, Ad, Ac, Ah)",
-      "cards": [0, 13, 26, 39, 52]
+      "cards": "A♥, A♠, A♦, A♣, A♥"
     },
     {
       "string": "Straigth flush, five high (5s, 4s, 3s, 2s, As)",
-      "cards": [13, 14, 15, 16, 17]
+      "cards": "A♠, 2♠, 3♠, 4♠, 5♠"
     },
     {
       "string": "Four of a kind, aces (Ah, As, Ad, Ac, Kh)",
-      "cards": [0, 13, 26, 39, 12]
+      "cards": "A♥, A♠, A♦, A♣, K♥"
     },
     {
       "string": "Full house, kings over jacks (Ks, Kd, Kc, Jh, Js)",
-      "cards": [25, 38, 51, 10, 23]
+      "cards": "K♠, K♦, K♣, J♥, J♠"
     },
     {
       "string": "Flush, ace high (Ah, Qh, Jh, Th, 9h)",
-      "cards": [0, 11, 10, 9, 8]
+      "cards": "A♥, Q♥, J♥, T♥, 9♥"
     },
     {
       "string": "Straigth, ace high (Ah, Ks, Qd, Jc, Th)",
-      "cards": [0, 25, 37, 49, 9]
+      "cards": "A♥, K♠, Q♦, J♣, T♥"
     },
     {
       "string": "Three of a kind, aces (Ah, As, Ad, Kh, Qh)",
-      "cards": [0, 13, 26, 12, 11]
+      "cards": "A♥, A♠, A♦, K♥, Q♥"
     },
     {
       "string": "Two pairs, kings and jacks (Ks, Kd, Jh, Js, 9c)",
-      "cards": [25, 38, 10, 23, 47]
+      "cards": "K♠, K♦, J♥, J♠, 9♣"
     },
     {
       "string": "Pair, aces (Ah, As, Kh, Qh, Jh)",
-      "cards": [0, 13, 12, 11, 10]
+      "cards": "A♥, A♠, K♥, Q♥, J♥"
     },
     {
       "string": "Eight high (8h, 7s, 4h, 3h, 2h)",
-      "cards": [7, 19, 3, 2, 1]
+      "cards": "8♥, 7♠, 4♥, 3♥, 2♥"
     }
   ]
 }
