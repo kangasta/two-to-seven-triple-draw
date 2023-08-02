@@ -1,5 +1,6 @@
 import { Card, Deck } from '../two-to-seven-triple-draw';
 import { isSorted } from '../arr';
+import { Cards } from '../card';
 
 describe('Deck', (): void => {
   const asCardsArray = (deck: Deck): Card[] => {
@@ -43,5 +44,17 @@ describe('Deck', (): void => {
     expect(deck.cardsRemaining).toEqual(52 * 3);
     expect(deck.popN(52)).toHaveLength(52);
     expect(deck.cardsRemaining).toEqual(52 * 2);
+  });
+  it('provides method to read deck from string', (): void => {
+    const deck = Deck.fromString('_XYZabc');
+
+    expect(deck.cardsRemaining).toEqual(6);
+    const cards = deck.popN(6).reverse();
+    expect(cards).toEqual(new Cards([23, 24, 25, 26, 27, 28]));
+  });
+  it('provides method to write the deck into a string', (): void => {
+    const deck = Deck.fromString('Ah As Ad Ac');
+
+    expect(deck.toString()).toEqual('_ANan');
   });
 });

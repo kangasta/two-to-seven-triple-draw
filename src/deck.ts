@@ -1,4 +1,4 @@
-import Card, { CardJSON } from './card';
+import Card, { CardJSON, Cards } from './card';
 import { shuffle, isSorted } from './arr';
 
 interface DeckJSON {
@@ -20,6 +20,12 @@ class Deck {
   public static fromJSON({ cards }: DeckJSON): Deck {
     const deck = new Deck(false, 0);
     deck.cards = cards.map((i: CardJSON): Card => Card.fromJSON(i));
+    return deck;
+  }
+
+  public static fromString(input: string): Deck {
+    const deck = new Deck(false, 0);
+    deck.cards = new Cards(input);
     return deck;
   }
 
@@ -48,6 +54,10 @@ class Deck {
     }
 
     return cards;
+  }
+
+  public toString(stringType = Card.StringType.Char): string {
+    return new Cards(this.cards).toString(stringType);
   }
 }
 
