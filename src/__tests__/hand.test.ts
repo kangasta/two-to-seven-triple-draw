@@ -1,6 +1,6 @@
 import Hand, { HandRank } from '../hand';
 import { isSorted, shuffle } from '../arr';
-import Card, { Cards } from '../card';
+import Card, { CardStringType, Cards } from '../card';
 
 import * as testdata from './hand-testdata.json';
 
@@ -80,6 +80,13 @@ describe('Hand', (): void => {
           new Hand(rank, new Cards(cards)),
       );
 
+      // Validate cards match order returned by solve
+      for (let i = 0; i < hands.length; i++) {
+        expect(hands[i].toString()).toEqual(
+          Hand.solve(hands[i].cards).toString(),
+        );
+      }
+
       expect(isSorted(hands, Hand.compare)).toEqual(true);
 
       shuffle(hands);
@@ -87,6 +94,15 @@ describe('Hand', (): void => {
 
       hands.sort(Hand.compare);
       expect(isSorted(hands, Hand.compare)).toEqual(true);
+    });
+    it('rates 6 high straight better than 5 high straigh', (): void => {
+      const a = Hand.solve(new Cards('Ah 2s 3d 4h 5c'));
+      const b = Hand.solve(new Cards('2s 3d 4h 5c 6h'));
+
+      expect(a).toBeTruthy();
+      expect(b).toBeTruthy();
+
+      expect(Hand.compare(a, b));
     });
     it('does not allow comparing hands with different number of cards', (): void => {
       const commonCards = new Cards([0, 2 + 13, 4, 6 + 13]);
@@ -214,15 +230,17 @@ describe('Hand', (): void => {
       expect(Hand.isStraight(cardsIn)).toEqual(false);
     });
     it('returns included cards sorted by value when straight in input array', (): void => {
-      let cardsIn = new Cards([9, 10, 11, 12, 0]);
-      expect(Hand.isStraight(cardsIn)).toEqual(new Cards([0, 12, 11, 10, 9]));
-      cardsIn = new Cards([14, 15, 16, 17, 18]);
+      let cardsIn = new Cards(['Th', 'Jh', 'Qh', 'Kh', 'Ah']);
+      expect(Hand.isStraight(cardsIn)).toEqual(
+        new Cards(['Ah', 'Kh', 'Qh', 'Jh', 'Th']),
+      );
+      cardsIn = new Cards(['2s', '3s', '4s', '5s', '6s']);
       expect(Hand.isStraight(cardsIn)).toEqual(new Cards([18, 17, 16, 15, 14]));
     });
     it('finds straight with small ace', (): void => {
-      const cardsIn = new Cards([0, 1 + 13, 2 + 2 * 13, 3, 4 + 3 * 13]);
+      const cardsIn = new Cards(['Ah', '2s', '3d', '4h', '5c']);
       expect(Hand.isStraight(cardsIn)).toEqual(
-        new Cards([4 + 3 * 13, 3, 2 + 2 * 13, 1 + 13, 0]),
+        new Cards(['5c', '4h', '3d', '2s', 'Ah']),
       );
     });
     it('slices return array to only contain num cards', (): void => {
