@@ -55,7 +55,7 @@ const stringToNum = (cardStr: string): number => {
 };
 
 export class Cards extends Array<Card> {
-  constructor(input: string | number | string[] | number[]) {
+  constructor(input: string | number | string[] | number[] | Card[]) {
     if (typeof input === 'number') {
       super(input);
     } else {
@@ -66,14 +66,20 @@ export class Cards extends Array<Card> {
   }
 
   public toString(stringType = Card.StringType.Long): string {
-    return this.map(card => card.toString(stringType)).join(', ')
+    return this.map((card) => card.toString(stringType)).join(', ');
   }
 }
 
+const parseNum = (input: number | string | Card): number => {
+  if (typeof input === 'string') return stringToNum(input);
+  if (input instanceof Card) return input.num;
+  return input;
+};
+
 class Card {
   public readonly num: number;
-  public constructor(input: number | string) {
-    this.num = typeof input === 'string' ? stringToNum(input) : input;
+  public constructor(input: number | string | Card) {
+    this.num = parseNum(input);
   }
 
   public static fromJSON({ num }: CardJSON): Card {
