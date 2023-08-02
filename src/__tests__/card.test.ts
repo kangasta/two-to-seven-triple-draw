@@ -1,4 +1,4 @@
-import Card, { CardStringType, Cards } from '../card';
+import { Card, CardStringType, Cards } from '../card';
 
 describe('Card', (): void => {
   it.each(['14s', '1h', 'asd'])('throws on invalid input (%s)', (input) => {

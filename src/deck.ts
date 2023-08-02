@@ -1,11 +1,11 @@
-import Card, { CardJSON, Cards } from './card';
-import { shuffle, isSorted } from './arr';
+import { isSorted, shuffle } from './arr';
+import { Card, CardJSON, Cards } from './card';
 
 interface DeckJSON {
   cards: CardJSON[];
 }
 
-class Deck {
+export class Deck {
   private cards: Card[];
   public constructor(shuffleDeck = true, numDecks = 1) {
     this.cards = [...Array(52 * numDecks).keys()].map(
@@ -60,5 +60,3 @@ class Deck {
     return new Cards(this.cards).toString(stringType);
   }
 }
-
-export default Deck;

@@ -1,6 +1,6 @@
-import Card, { CardJSON, Cards } from './card';
-import { uuid4 } from './uuid';
 import { arraySubtraction, getCombinations, last, uniqueFilter } from './arr';
+import { Card, CardJSON, Cards } from './card';
+import { uuid4 } from './uuid';
 
 export interface HandJSON {
   rank: number;
@@ -21,7 +21,7 @@ export enum HandRank {
   FiveOfAKind = 45, // Requires wild support, which is not currently implemented
 }
 
-class Hand {
+export class Hand {
   public readonly uuid: string;
   public readonly rank: number;
   public readonly cards: Card[];
@@ -251,5 +251,3 @@ class Hand {
     return Hand.isNumOfAKindCombination([2, 2], cards);
   }
 }
-
-export default Hand;
