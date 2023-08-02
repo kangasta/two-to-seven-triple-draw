@@ -1,4 +1,4 @@
-import Card, { CardJSON } from './card';
+import Card, { CardJSON, Cards } from './card';
 import { uuid4 } from './uuid';
 import { arraySubtraction, getCombinations, last, uniqueFilter } from './arr';
 
@@ -38,9 +38,7 @@ class Hand {
   public static readonly Rank = HandRank;
 
   public getCardsString(cardStrType = Card.StringType.Short): string {
-    return this.cards
-      .map((a: Card): string => a.toString(cardStrType))
-      .join(', ');
+    return new Cards(this.cards).toString(cardStrType);
   }
 
   public toString(cardStrType = Card.StringType.Short): string {

@@ -1,6 +1,9 @@
-import Card, { CardStringType } from '../card';
+import Card, { CardStringType, Cards } from '../card';
 
 describe('Card', (): void => {
+  it.each(['14s', '1h', 'asd'])('throws on invalid input (%s)', (input) => {
+    expect(() => new Card(input)).toThrowError();
+  });
   describe('toString', (): void => {
     it('gives string representation of a card', (): void => {
       const card = new Card(13);
@@ -8,7 +11,7 @@ describe('Card', (): void => {
       expect(card.toString(Card.StringType.Short)).toEqual('As');
     });
     it('supports different formats', (): void => {
-      const card = new Card(14);
+      const card = new Card('2s');
       expect(card.toString(Card.StringType.Long)).toEqual('two of spades');
       expect(card.toString(Card.StringType.Short)).toEqual('2s');
       expect(card.toString(Card.StringType.ShortEmoji)).toEqual('2♠');
@@ -47,9 +50,7 @@ describe('Card', (): void => {
   });
   describe('compare', (): void => {
     it('can be used to sort cards highest first', (): void => {
-      const cards = [0, 1 + 13, 2 + 26, 2, 3, 4].map(
-        (a: number): Card => new Card(a),
-      );
+      const cards = new Cards([0, 1 + 13, 2 + 26, 2, 3, 4]);
       cards.sort(Card.compare);
       expect(cards.map((a: Card): number => a.num)).toEqual([
         0, 4, 3, 28, 2, 14,

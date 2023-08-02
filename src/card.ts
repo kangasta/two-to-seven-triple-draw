@@ -20,10 +20,66 @@ export enum CardStringType {
   LongValue = 'LONG_VALUE',
 }
 
+const suitMap: Record<string, number> = {
+  '♥': 0,
+  '♠': 1,
+  '♦': 2,
+  '♣': 3,
+  h: 0,
+  s: 1,
+  d: 2,
+  c: 3,
+};
+
+const rankMap: Record<string, number> = {
+  A: 1,
+  T: 10,
+  J: 11,
+  Q: 12,
+  K: 13,
+};
+
+const stringToNum = (cardStr: string): number => {
+  const cardRe = /^([2-9ATJQK]{1}|10)([♥♠♦♣hsdc]{1})$/;
+  const match = cardStr.match(cardRe);
+  if (!match) {
+    throw new Error(
+      `Could not parse card from "${cardStr}". Input should match ${cardRe}.`,
+    );
+  }
+
+  const [_, rawRank, suitKey] = match;
+  const rankNum = Number(rawRank);
+  const rank = (Number.isNaN(rankNum) ? rankMap[rawRank] : rankNum) - 1;
+  return suitMap[suitKey] * 13 + rank;
+};
+
+export class Cards extends Array<Card> {
+  constructor(input: string | number | string[] | number[] | Card[]) {
+    if (typeof input === 'number') {
+      super(input);
+    } else {
+      super();
+      const arr = Array.isArray(input) ? input : input.split(/[\s,]+/);
+      arr.forEach((i) => this.push(new Card(i)));
+    }
+  }
+
+  public toString(stringType = Card.StringType.Long): string {
+    return this.map((card) => card.toString(stringType)).join(', ');
+  }
+}
+
+const parseNum = (input: number | string | Card): number => {
+  if (typeof input === 'string') return stringToNum(input);
+  if (input instanceof Card) return input.num;
+  return input;
+};
+
 class Card {
   public readonly num: number;
-  public constructor(num: number) {
-    this.num = num;
+  public constructor(input: number | string | Card) {
+    this.num = parseNum(input);
   }
 
   public static fromJSON({ num }: CardJSON): Card {
