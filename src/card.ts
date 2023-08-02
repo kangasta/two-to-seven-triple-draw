@@ -10,6 +10,7 @@ export enum CardSuits {
 }
 
 export enum CardStringType {
+  Char = 'CHAR',
   Short = 'SHORT',
   Long = 'LONG',
   ShortEmoji = 'SHORT_EMOJI',
@@ -54,18 +55,34 @@ const stringToNum = (cardStr: string): number => {
   return suitMap[suitKey] * 13 + rank;
 };
 
+const parseString = (input: string) => {
+  const charStrRe = /^_[a-z]+$/i;
+  if (input.match(charStrRe)) {
+    const chars = Array.from(input.slice(1));
+    return chars.map((i) => {
+      const c = i.charCodeAt(0);
+      // A = 65, a = 97
+      return c < 91 ? c - 65 : c - 97 + 26;
+    });
+  }
+  return input.split(/[\s,]+/);
+};
+
 export class Cards extends Array<Card> {
   constructor(input: string | number | string[] | number[] | Card[]) {
     if (typeof input === 'number') {
       super(input);
     } else {
       super();
-      const arr = Array.isArray(input) ? input : input.split(/[\s,]+/);
+      const arr = Array.isArray(input) ? input : parseString(input);
       arr.forEach((i) => this.push(new Card(i)));
     }
   }
 
-  public toString(stringType = Card.StringType.Long): string {
+  public toString(stringType = Card.StringType.Short): string {
+    if (stringType === CardStringType.Char) {
+      return '_' + this.map((card) => card.toString(stringType)).join('');
+    }
     return this.map((card) => card.toString(stringType)).join(', ');
   }
 }
@@ -97,6 +114,7 @@ class Card {
   public static readonly Suits = CardSuits;
   public static readonly StringType = CardStringType;
 
+  private static chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
   private static emojiSuits = ['♥', '♠', '♦', '♣'];
   private static shortSuits = ['h', 's', 'd', 'c'];
   private static longSuits = ['hearts', 'spades', 'diamonds', 'clubs'];
@@ -149,6 +167,8 @@ class Card {
           ' of ' +
           this.toString(Card.StringType.LongSuit)
         );
+      case Card.StringType.Char:
+        return Card.chars[this.num];
       case Card.StringType.ShortSuit:
         return Card.shortSuits[this.suit];
       case Card.StringType.LongSuit:
