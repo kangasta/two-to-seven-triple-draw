@@ -1,6 +1,6 @@
-import Hand, { HandRank } from '../hand';
 import { isSorted, shuffle } from '../arr';
-import Card, { Cards } from '../card';
+import { Card, Cards } from '../card';
+import { Hand, HandRank } from '../hand';
 
 import * as testdata from './hand-testdata.json';
 

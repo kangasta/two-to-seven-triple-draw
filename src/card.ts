@@ -93,7 +93,7 @@ const parseNum = (input: number | string | Card): number => {
   return input;
 };
 
-class Card {
+export class Card {
   public readonly num: number;
   public constructor(input: number | string | Card) {
     this.num = parseNum(input);
@@ -195,5 +195,3 @@ class Card {
     return b.value - a.value;
   }
 }
-
-export default Card;

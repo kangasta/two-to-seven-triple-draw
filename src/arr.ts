@@ -1,8 +1,8 @@
-const arraySubtraction = <T>(a: T[], b: T[]): T[] => {
+export const arraySubtraction = <T>(a: T[], b: T[]): T[] => {
   return a.filter((c: T): boolean => !b.includes(c));
 };
 
-const getCombinationsHelper = <T>(
+export const getCombinationsHelper = <T>(
   array: T[],
   num: number,
   index: number,
@@ -24,13 +24,13 @@ const getCombinationsHelper = <T>(
   }
 };
 
-const getCombinations = <T>(arr: T[], n: number): T[][] => {
+export const getCombinations = <T>(arr: T[], n: number): T[][] => {
   const out: T[][] = [];
   getCombinationsHelper(arr, n, 0, [], out);
   return out;
 };
 
-const isSorted = <T>(
+export const isSorted = <T>(
   arr: T[],
   func: (a: T, b: T) => number,
   reverse = false,
@@ -48,9 +48,9 @@ const isSorted = <T>(
   }
 };
 
-const last = <T>(arr: T[]): T => arr[arr.length - 1];
+export const last = <T>(arr: T[]): T => arr[arr.length - 1];
 
-const shuffle = <T>(arr: T[]): T[] => {
+export const shuffle = <T>(arr: T[]): T[] => {
   // Source: https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -59,15 +59,10 @@ const shuffle = <T>(arr: T[]): T[] => {
   return arr;
 };
 
-const uniqueFilter = <T>(element: T, index: number, array: T[]): boolean => {
+export const uniqueFilter = <T>(
+  element: T,
+  index: number,
+  array: T[],
+): boolean => {
   return array.indexOf(element) === index;
-};
-
-export {
-  arraySubtraction,
-  getCombinations,
-  isSorted,
-  last,
-  shuffle,
-  uniqueFilter,
 };

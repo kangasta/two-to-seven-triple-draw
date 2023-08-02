@@ -1,6 +1,5 @@
-import { Card, Deck } from '../two-to-seven-triple-draw';
 import { isSorted } from '../arr';
-import { Cards } from '../card';
+import { Card, Cards, Deck } from '../two-to-seven-triple-draw';
 
 describe('Deck', (): void => {
   const asCardsArray = (deck: Deck): Card[] => {

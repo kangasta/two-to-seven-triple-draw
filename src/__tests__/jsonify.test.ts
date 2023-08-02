@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Card, Hand, Deck } from '../two-to-seven-triple-draw';
+import { Card, Deck, Hand } from '../two-to-seven-triple-draw';
 
 interface ComponentUnderTest {
   name: string;
